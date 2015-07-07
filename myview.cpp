@@ -1,6 +1,8 @@
 #include "myview.h"
 #include "myplane.h"
 #include <QDebug>
+#include <QWidget>
+#include <QPixmap>
 
 MyView::MyView(QWidget *parent)
 {

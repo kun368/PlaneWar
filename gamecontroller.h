@@ -16,10 +16,14 @@ public:
     explicit GameController(QGraphicsScene *scene, QObject *parent = 0);
     ~GameController();
 public slots:
+    void resume();
+    void pause();
+    void gameOver();
+    void addEnemy();
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
 private:
-    QTimer timer;
+    QTimer timer, timerApperEnemy;
     QGraphicsScene *scene;
     MyPlane *plane;
 };
