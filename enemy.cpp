@@ -41,6 +41,7 @@ void Enemy::handleCollisions()
         if(item->data(GD_type) == GO_Bullet) {
             controller.updateText(100 + qrand() % 50);
             controller.removeItem(this);
+            controller.ariseCollision(pos());
             return;
         }
     }

@@ -2,8 +2,10 @@
 #include "enemy.h"
 #include "bullet.h"
 #include "ball.h"
+#include "collision.h"
 #include <QDebug>
 #include <QFont>
+#include <QTimer>
 #include <QMessageBox>
 
 GameController::GameController(QGraphicsScene *scene, QObject *parent) :
@@ -78,6 +80,23 @@ void GameController::addEnemy()
     tempEnemy->setPos(x, y);
     scene->addItem(tempEnemy);
     shootBall(QPointF(x, y + 30));
+}
+
+void GameController::ariseCollision(QPointF pos)
+{
+    Collision *tempCollision = new Collision();
+    tempCollision->setPos(pos);
+    scene->addItem(tempCollision);
+    collis.push_back(tempCollision);
+    QTimer::singleShot(200, this, SLOT(disappearCollision()));
+}
+
+void GameController::disappearCollision()
+{
+    if(!collis.isEmpty()){
+        Collision* tempCollision = collis.takeFirst();
+        scene->removeItem(tempCollision);
+    }
 }
 
 void GameController::shootBullet(QPointF pos)

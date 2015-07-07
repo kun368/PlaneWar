@@ -9,7 +9,8 @@ enum GameObjectTypes {
     GO_Ball,
     GO_Bullet,
     GO_Enemy,
-    GO_MyPlane
+    GO_MyPlane,
+    GO_Collision
 };
 
 #endif // CONSTANTS_H

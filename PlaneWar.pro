@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     enemy.cpp \
     bullet.cpp \
     ball.cpp \
-    logindlg.cpp
+    logindlg.cpp \
+    collision.cpp
 
 HEADERS  += \
     myview.h \
@@ -29,7 +30,8 @@ HEADERS  += \
     bullet.h \
     ball.h \
     constants.h \
-    logindlg.h
+    logindlg.h \
+    collision.h
 
 FORMS    += \
     logindlg.ui

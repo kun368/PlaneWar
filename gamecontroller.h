@@ -2,8 +2,10 @@
 #define GAMECONTROLLER_H
 
 #include "myplane.h"
+#include "collision.h"
 #include <QObject>
 #include <QTimer>
+#include <QList>
 #include <QKeyEvent>
 #include <QGraphicsScene>
 #include <QGraphicsItem>
@@ -27,6 +29,8 @@ public slots:
     void pause();
     void gameOver();
     void addEnemy();
+    void ariseCollision(QPointF pos);
+    void disappearCollision();
     void shootBullet(QPointF pos);
     void shootBall(QPointF pos);
 protected:
@@ -34,6 +38,7 @@ protected:
 private:
     int score;
     bool gameIsRun;
+    QList<Collision*> collis;
     QTimer timer, timerApperEnemy;
     QGraphicsScene *scene;
     MyPlane *plane;
