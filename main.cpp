@@ -12,7 +12,6 @@ int main(int argc, char *argv[])
     dlg.show();
     if(dlg.exec() == QDialog::Accepted) {
         MyView view;
-        QObject::connect(&view, SIGNAL(exitApp()), &a, SLOT(quit()));
         view.show();
         return a.exec();
     }

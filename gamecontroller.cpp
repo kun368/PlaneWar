@@ -8,13 +8,10 @@
 
 GameController::GameController(QGraphicsScene *scene, QObject *parent) :
     QObject(parent),
-    scene(scene),
-    score(0),
-    text(new QGraphicsTextItem())
+    scene(scene)
 {
       timer.start(1000/32);
       timerApperEnemy.start(1000);
-      //安装事件过滤器,在GameController中处理事件
       scene->installEventFilter(this);
       resume();
 }
@@ -43,23 +40,28 @@ void GameController::updateText(int x)
 
 void GameController::resume()
 {
+    qDebug() << "222";
     plane = new MyPlane(*this);
     plane->setFocus();
     plane->setPos(240, 400);
     scene->addItem(plane);
-    addEnemy();
+
     score = 0;
-    updateText(1000);
+    text = new QGraphicsTextItem();
+    text->setPos(10, 10);
     scene->addItem(text);
+    updateText(1000);
+
     connect(&timer, SIGNAL(timeout()), scene, SLOT(advance()));
     connect(&timerApperEnemy, SIGNAL(timeout()), this, SLOT(addEnemy()));
 }
 
 void GameController::pause()
 {
+    scene->clear();
     disconnect(&timer, SIGNAL(timeout()), scene, SLOT(advance()));
     disconnect(&timerApperEnemy, SIGNAL(timeout()), this, SLOT(addEnemy()));
-    scene->clear();
+    qDebug() << "111";
 }
 
 void GameController::gameOver()
@@ -96,7 +98,7 @@ void GameController::shootBall(QPointF pos)
 
 bool GameController::eventFilter(QObject *obj, QEvent *event)
 {
-    if(event->type() == QEvent::KeyPress){
+    if(event->type() == QEvent::KeyPress) {
         QKeyEvent *key = (QKeyEvent*)event;
         switch (key->key()) {
         case Qt::Key_Left:

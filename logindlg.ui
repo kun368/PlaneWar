@@ -19,7 +19,7 @@
   <property name="windowTitle">
    <string>飞机大战登陆</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>60</x>
@@ -37,7 +37,7 @@
        </font>
       </property>
       <property name="text">
-       <string>飞机大战 V1.0</string>
+       <string>飞机大战 V1.1</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -61,7 +61,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>60</x>

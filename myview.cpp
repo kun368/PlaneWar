@@ -16,5 +16,6 @@ MyView::MyView(QWidget *parent)
     setScene(scene);
 
     game = new GameController(scene, this);
+    connect(game, SIGNAL(exitApp()), this, SLOT(close()));
 }
 
