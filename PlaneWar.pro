@@ -16,12 +16,16 @@ SOURCES += main.cpp \
     myview.cpp \
     myplane.cpp \
     gamecontroller.cpp \
-    enemy.cpp
+    enemy.cpp \
+    bullet.cpp \
+    ball.cpp
 
 HEADERS  += \
     myview.h \
     myplane.h \
     gamecontroller.h \
-    enemy.h
+    enemy.h \
+    bullet.h \
+    ball.h
 
 FORMS    +=

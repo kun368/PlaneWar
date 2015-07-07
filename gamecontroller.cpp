@@ -1,5 +1,7 @@
 #include "gamecontroller.h"
 #include "enemy.h"
+#include "bullet.h"
+#include "ball.h"
 #include <QDebug>
 
 GameController::GameController(QGraphicsScene *scene, QObject *parent) :
@@ -48,9 +50,25 @@ void GameController::gameOver()
 void GameController::addEnemy()
 {
     int x = qrand() % 500, y = qrand() % 300;
+
     Enemy *tempEnemy = new Enemy;
     tempEnemy->setPos(x, y);
     scene->addItem(tempEnemy);
+    shootBall(QPointF(x + 5, y + 10));
+}
+
+void GameController::shootBullet(QPointF pos)
+{
+    Bullet *tempBullet = new Bullet();
+    tempBullet->setPos(pos);
+    scene->addItem(tempBullet);
+}
+
+void GameController::shootBall(QPointF pos)
+{
+    Ball *tempBall = new Ball;
+    tempBall->setPos(pos);
+    scene->addItem(tempBall);
 }
 
 bool GameController::eventFilter(QObject *obj, QEvent *event)
@@ -69,6 +87,9 @@ bool GameController::eventFilter(QObject *obj, QEvent *event)
             break;
         case Qt::Key_Down:
             plane->moveDown();
+            break;
+        case Qt::Key_Space:
+            shootBullet(plane->pos());
             break;
         }
     }

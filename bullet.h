@@ -1,18 +1,16 @@
-#ifndef ENEMY_H
-#define ENEMY_H
+#ifndef BULLET_H
+#define BULLET_H
 
-#include "myplane.h"
 #include <QObject>
-#include <QTimer>
 #include <QGraphicsItem>
 
-class Enemy :public QGraphicsItem
+class Bullet : public QGraphicsItem
 {
 public:
-    Enemy();
+    Bullet();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void advance(int phace);
 };
 
-#endif // ENEMY_H
+#endif // BULLET_H

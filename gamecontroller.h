@@ -20,6 +20,8 @@ public slots:
     void pause();
     void gameOver();
     void addEnemy();
+    void shootBullet(QPointF pos);
+    void shootBall(QPointF pos);
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
 private:

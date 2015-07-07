@@ -2,7 +2,6 @@
 
 Enemy::Enemy()
 {
-
 }
 
 QRectF Enemy::boundingRect() const
