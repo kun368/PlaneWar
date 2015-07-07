@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     gamecontroller.cpp \
     enemy.cpp \
     bullet.cpp \
-    ball.cpp
+    ball.cpp \
+    logindlg.cpp
 
 HEADERS  += \
     myview.h \
@@ -27,9 +28,11 @@ HEADERS  += \
     enemy.h \
     bullet.h \
     ball.h \
-    constants.h
+    constants.h \
+    logindlg.h
 
-FORMS    +=
+FORMS    += \
+    logindlg.ui
 
 DISTFILES +=
 
