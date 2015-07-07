@@ -29,6 +29,6 @@ void Ball::advance(int phace)
     if(!phace) return;
 
     QPointF cur = pos();
-    setPos(cur.x(), cur.y() + 2);
+    setPos(cur.x(), cur.y() + 5);
 }
 

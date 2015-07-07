@@ -40,7 +40,6 @@ void GameController::updateText(int x)
 
 void GameController::resume()
 {
-    qDebug() << "222";
     plane = new MyPlane(*this);
     plane->setFocus();
     plane->setPos(240, 400);
@@ -61,7 +60,6 @@ void GameController::pause()
     scene->clear();
     disconnect(&timer, SIGNAL(timeout()), scene, SLOT(advance()));
     disconnect(&timerApperEnemy, SIGNAL(timeout()), this, SLOT(addEnemy()));
-    qDebug() << "111";
 }
 
 void GameController::gameOver()

@@ -6,5 +6,6 @@
         <file>MyPlane.png</file>
         <file>Ball1.BMP</file>
         <file>background.jpg</file>
+        <file>Icon.png</file>
     </qresource>
 </RCC>

@@ -1,5 +1,6 @@
 #include "logindlg.h"
 #include "ui_logindlg.h"
+#include <QIcon>
 
 LogInDlg::LogInDlg(QWidget *parent) :
     QDialog(parent),
@@ -7,6 +8,8 @@ LogInDlg::LogInDlg(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->pushButton_exit, SIGNAL(clicked(bool)), this, SLOT(close()));
+    QIcon icon(":/images/Icon.png");
+    setWindowIcon(icon);
 }
 
 LogInDlg::~LogInDlg()

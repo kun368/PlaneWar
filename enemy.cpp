@@ -30,7 +30,7 @@ void Enemy::advance(int phace)
     if(!phace) return;
 
     QPointF cur = pos();
-    setPos(cur.x(), cur.y() + 1);
+    setPos(cur.x(), cur.y() + 2);
     handleCollisions();
 }
 
