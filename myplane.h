@@ -7,6 +7,8 @@
 #include <QGraphicsView>
 #include <QGraphicsItem>
 #include <QPainter>
+#include <QPicture>
+#include <QPixmap>
 
 class GameController;
 
@@ -24,6 +26,7 @@ public:
     void moveDown();
 private:
     GameController &controller;
+    QPixmap pixMap;
 };
 
 #endif // MYPLANE_H

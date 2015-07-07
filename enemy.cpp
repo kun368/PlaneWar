@@ -1,22 +1,28 @@
 #include "enemy.h"
+#include "gamecontroller.h"
 #include <QPainter>
 
 Enemy::Enemy(GameController &controller):
     controller(controller)
 {
     setData(GD_type, GO_Enemy);
+    pixMap.load(":/images/Enemy.png");
 }
 
 QRectF Enemy::boundingRect() const
 {
-    qreal eps = 1;
-    return QRectF(0-eps/2, 0-eps/2, 20+eps, 20+eps);
+    int w = pixMap.width(), h = pixMap.height();
+    return QRectF(-w/2, -h/2, w, h);
 }
 
 void Enemy::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::blue);
-    painter->drawEllipse(0, 0, 20, 20);
+    if(!pixMap.isNull()) {
+        painter->save();
+        int w = pixMap.width(), h = pixMap.height();
+        painter->drawPixmap(QPoint(-w/2, -h/2), pixMap);
+        painter->restore();
+    }
 }
 
 void Enemy::advance(int phace)
@@ -25,4 +31,16 @@ void Enemy::advance(int phace)
 
     QPointF cur = pos();
     setPos(cur.x(), cur.y() + 1);
+    handleCollisions();
+}
+
+void Enemy::handleCollisions()
+{
+    QList<QGraphicsItem *> collisions = collidingItems();
+    foreach (QGraphicsItem *item, collisions) {
+        if(item->data(GD_type) == GO_Bullet) {
+            controller.removeItem(this);
+            return;
+        }
+    }
 }

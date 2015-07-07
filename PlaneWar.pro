@@ -30,3 +30,8 @@ HEADERS  += \
     constants.h
 
 FORMS    +=
+
+DISTFILES +=
+
+RESOURCES += \
+    res.qrc

@@ -11,15 +11,8 @@ GameController::GameController(QGraphicsScene *scene, QObject *parent) :
 {
       timer.start(1000/32);
       timerApperEnemy.start(1000);
-      //初始化我的战机（唯一）
-      plane = new MyPlane(*this);
-      plane->setFocus();
-      plane->setPos(240, 400);
-      scene->addItem(plane);
-      addEnemy();
       //安装事件过滤器,在GameController中处理事件
       scene->installEventFilter(this);
-
       resume();
 }
 
@@ -28,8 +21,18 @@ GameController::~GameController()
 
 }
 
+void GameController::removeItem(QGraphicsItem *item)
+{
+    scene->removeItem(item);
+}
+
 void GameController::resume()
 {
+    plane = new MyPlane(*this);
+    plane->setFocus();
+    plane->setPos(240, 400);
+    scene->addItem(plane);
+    addEnemy();
     connect(&timer, SIGNAL(timeout()), scene, SLOT(advance()));
     connect(&timerApperEnemy, SIGNAL(timeout()), this, SLOT(addEnemy()));
 }
@@ -38,27 +41,20 @@ void GameController::pause()
 {
     disconnect(&timer, SIGNAL(timeout()), scene, SLOT(advance()));
     disconnect(&timerApperEnemy, SIGNAL(timeout()), this, SLOT(addEnemy()));
+    scene->clear();
 }
 
 void GameController::gameOver()
 {
     pause();
-    scene->clear();
     int ret = QMessageBox::question(0, tr("提示"), tr("你已经挂了~\n是否重新开始游戏？"), QMessageBox::Yes, QMessageBox::No);
-    if(ret == QMessageBox::Yes) {
-        plane = new MyPlane(*this);
-        plane->setFocus();
-        plane->setPos(240, 400);
-        scene->addItem(plane);
-        addEnemy();
-        resume();
-    }
+    if(ret == QMessageBox::Yes) resume();
     else emit exitApp();
 }
 
 void GameController::addEnemy()
 {
-    int x = qrand() % 500, y = qrand() % 300;
+    int x = qrand() % 500, y = 1;
     Enemy *tempEnemy = new Enemy(*this);
     tempEnemy->setPos(x, y);
     scene->addItem(tempEnemy);

@@ -3,24 +3,30 @@
 #include <QDebug>
 #include <QtAlgorithms>
 #include <QList>
+#include <QDebug>
 
 
 MyPlane::MyPlane(GameController &controller):
     controller(controller)
 {
     setData(GD_type, GO_MyPlane);
+    pixMap.load(":/images/MyPlane.png");
 }
 
 QRectF MyPlane::boundingRect() const
 {
-    qreal eps = 1;
-    return QRectF(0-eps/2, 0-eps/2, 20+eps, 20+eps);
+    int w = pixMap.width(), h = pixMap.height();
+    return QRectF(-w/2, -h/2, w, h);
 }
 
 void MyPlane::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::red);
-    painter->drawRect(0, 0, 20, 20);
+    if(!pixMap.isNull()) {
+        painter->save();
+        int w = pixMap.width(), h = pixMap.height();
+        painter->drawPixmap(QPoint(-w/2, -h/2), pixMap);
+        painter->restore();
+    }
 }
 
 void MyPlane::advance(int phace)
@@ -55,7 +61,7 @@ void MyPlane::moveRight()
 void MyPlane::moveUp()
 {
     QPointF cur = pos();
-    setPos(cur.x(), qMax(cur.y()-10, 0.0));
+    setPos(cur.x(), qMax(cur.y()-10, 100.0));
 }
 
 void MyPlane::moveDown()

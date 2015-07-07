@@ -17,6 +17,7 @@ class GameController : public QObject
 public:
     explicit GameController(QGraphicsScene *scene, QObject *parent = 0);
     ~GameController();
+    void removeItem(QGraphicsItem *item);
 signals:
     void exitApp();
 public slots:

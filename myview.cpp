@@ -12,7 +12,7 @@ MyView::MyView(QWidget *parent)
 
     scene = new QGraphicsScene;
     scene->setSceneRect(0, 0, 500, 600);
-    scene->setBackgroundBrush(QBrush(Qt::gray)); //设置背景
+    scene->setBackgroundBrush(QPixmap(":/images/background.jpg")); //设置背景
     setScene(scene);
 
     game = new GameController(scene, this);

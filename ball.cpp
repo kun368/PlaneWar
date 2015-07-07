@@ -5,18 +5,23 @@
 Ball::Ball()
 {
     setData(GD_type, GO_Ball);
+    pixMap.load(":/images/Ball1.BMP");
 }
 
 QRectF Ball::boundingRect() const
 {
-    qreal eps = 1;
-    return QRectF(0-eps/2, 0-eps/2, 10+eps, 10+eps);
+    int w = pixMap.width(), h = pixMap.height();
+    return QRectF(-w/2, -h/2, w, h);
 }
 
 void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::yellow);
-    painter->drawEllipse(0, 0, 10, 10);
+    if(!pixMap.isNull()) {
+        painter->save();
+        int w = pixMap.width(), h = pixMap.height();
+        painter->drawPixmap(QPoint(-w/2, -h/2), pixMap);
+        painter->restore();
+    }
 }
 
 void Ball::advance(int phace)

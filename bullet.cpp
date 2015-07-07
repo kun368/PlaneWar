@@ -4,18 +4,23 @@
 Bullet::Bullet()
 {
     setData(GD_type, GO_Bullet);
+    pixMap.load(":/images/Bullet.png");
 }
 
 QRectF Bullet::boundingRect() const
 {
-    qreal eps = 1;
-    return QRectF(0-eps/2, 0-eps/2, 5+eps, 5+eps);
+    int w = pixMap.width(), h = pixMap.height();
+    return QRectF(-w/2, -h/2, w, h);
 }
 
 void Bullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::black);
-    painter->drawRect(0, 0, 5, 5);
+    if(!pixMap.isNull()) {
+        painter->save();
+        int w = pixMap.width(), h = pixMap.height();
+        painter->drawPixmap(QPoint(-w/2, -h/2), pixMap);
+        painter->restore();
+    }
 }
 
 void Bullet::advance(int phace)
