@@ -12,9 +12,12 @@ TARGET = PlaneWar
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp
+SOURCES += main.cpp \
+    myview.cpp \
+    myplane.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += \
+    myview.h \
+    myplane.h
 
-FORMS    += mainwindow.ui
+FORMS    +=
