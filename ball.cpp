@@ -4,7 +4,7 @@
 
 Ball::Ball()
 {
-
+    setData(GD_type, GO_Ball);
 }
 
 QRectF Ball::boundingRect() const

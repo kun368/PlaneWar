@@ -3,6 +3,7 @@
 #include "bullet.h"
 #include "ball.h"
 #include <QDebug>
+#include <QMessageBox>
 
 GameController::GameController(QGraphicsScene *scene, QObject *parent) :
     QObject(parent),
@@ -11,7 +12,7 @@ GameController::GameController(QGraphicsScene *scene, QObject *parent) :
       timer.start(1000/32);
       timerApperEnemy.start(1000);
       //初始化我的战机（唯一）
-      plane = new MyPlane;
+      plane = new MyPlane(*this);
       plane->setFocus();
       plane->setPos(240, 400);
       scene->addItem(plane);
@@ -41,17 +42,24 @@ void GameController::pause()
 
 void GameController::gameOver()
 {
+    pause();
     scene->clear();
-    plane = new MyPlane;
-    scene->addItem(plane);
-    addEnemy();
+    int ret = QMessageBox::question(0, tr("提示"), tr("你已经挂了~\n是否重新开始游戏？"), QMessageBox::Yes, QMessageBox::No);
+    if(ret == QMessageBox::Yes) {
+        plane = new MyPlane(*this);
+        plane->setFocus();
+        plane->setPos(240, 400);
+        scene->addItem(plane);
+        addEnemy();
+        resume();
+    }
+    else emit exitApp();
 }
 
 void GameController::addEnemy()
 {
     int x = qrand() % 500, y = qrand() % 300;
-
-    Enemy *tempEnemy = new Enemy;
+    Enemy *tempEnemy = new Enemy(*this);
     tempEnemy->setPos(x, y);
     scene->addItem(tempEnemy);
     shootBall(QPointF(x + 5, y + 10));

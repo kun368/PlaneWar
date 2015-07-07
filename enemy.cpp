@@ -1,7 +1,10 @@
 #include "enemy.h"
+#include <QPainter>
 
-Enemy::Enemy()
+Enemy::Enemy(GameController &controller):
+    controller(controller)
 {
+    setData(GD_type, GO_Enemy);
 }
 
 QRectF Enemy::boundingRect() const
@@ -23,6 +26,3 @@ void Enemy::advance(int phace)
     QPointF cur = pos();
     setPos(cur.x(), cur.y() + 1);
 }
-
-
-

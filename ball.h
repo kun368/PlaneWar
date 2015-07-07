@@ -1,6 +1,7 @@
 #ifndef BALL_H
 #define BALL_H
 
+#include "constants.h"
 #include <QObject>
 #include <QGraphicsItem>
 

@@ -3,7 +3,7 @@
 
 Bullet::Bullet()
 {
-
+    setData(GD_type, GO_Bullet);
 }
 
 QRectF Bullet::boundingRect() const

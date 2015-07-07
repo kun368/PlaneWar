@@ -1,6 +1,7 @@
 #ifndef BULLET_H
 #define BULLET_H
 
+#include "constants.h"
 #include <QObject>
 #include <QGraphicsItem>
 

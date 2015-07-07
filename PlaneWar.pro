@@ -26,6 +26,7 @@ HEADERS  += \
     gamecontroller.h \
     enemy.h \
     bullet.h \
-    ball.h
+    ball.h \
+    constants.h
 
 FORMS    +=

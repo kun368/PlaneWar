@@ -2,10 +2,13 @@
 #include <QKeyEvent>
 #include <QDebug>
 #include <QtAlgorithms>
+#include <QList>
 
-MyPlane::MyPlane()
+
+MyPlane::MyPlane(GameController &controller):
+    controller(controller)
 {
-
+    setData(GD_type, GO_MyPlane);
 }
 
 QRectF MyPlane::boundingRect() const
@@ -18,6 +21,23 @@ void MyPlane::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
 {
     painter->setBrush(Qt::red);
     painter->drawRect(0, 0, 20, 20);
+}
+
+void MyPlane::advance(int phace)
+{
+    if(!phace) return;
+    handleCollisions();
+}
+
+void MyPlane::handleCollisions()
+{
+    QList<QGraphicsItem *> collisions = collidingItems();
+    foreach (QGraphicsItem *item, collisions) {
+        if(item->data(GD_type) == GO_Ball) {
+            controller.gameOver();
+            return;
+        }
+    }
 }
 
 void MyPlane::moveLeft()
