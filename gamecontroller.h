@@ -8,6 +8,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsItem>
 #include <QGraphicsView>
+#include <QGraphicsTextItem>
 
 class MyPlane;
 
@@ -18,6 +19,7 @@ public:
     explicit GameController(QGraphicsScene *scene, QObject *parent = 0);
     ~GameController();
     void removeItem(QGraphicsItem *item);
+    void updateText(int x);
 signals:
     void exitApp();
 public slots:
@@ -30,10 +32,12 @@ public slots:
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
 private:
+    int score;
     bool gameIsRun;
     QTimer timer, timerApperEnemy;
     QGraphicsScene *scene;
     MyPlane *plane;
+    QGraphicsTextItem *text;
 };
 
 #endif // GAMECONTROLLER_H
