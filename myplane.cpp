@@ -1,4 +1,7 @@
 #include "myplane.h"
+#include <QKeyEvent>
+#include <QDebug>
+#include <QtAlgorithms>
 
 MyPlane::MyPlane()
 {
@@ -15,5 +18,29 @@ void MyPlane::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
 {
     painter->setBrush(Qt::red);
     painter->drawRect(0, 0, 20, 20);
+}
+
+void MyPlane::moveLeft()
+{
+    QPointF cur = pos();
+    setPos(qMax(cur.x()-10, 0.0), cur.y());
+}
+
+void MyPlane::moveRight()
+{
+    QPointF cur = pos();
+    setPos(qMin(cur.x()+10, 500.0), cur.y());
+}
+
+void MyPlane::moveUp()
+{
+    QPointF cur = pos();
+    setPos(cur.x(), qMax(cur.y()-10, 0.0));
+}
+
+void MyPlane::moveDown()
+{
+    QPointF cur = pos();
+    setPos(cur.x(), qMin(cur.y()+10, 600.0));
 }
 

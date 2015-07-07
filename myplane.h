@@ -12,6 +12,10 @@ public:
     MyPlane();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void moveLeft();
+    void moveRight();
+    void moveUp();
+    void moveDown();
 };
 
 #endif // MYPLANE_H

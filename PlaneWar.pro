@@ -14,10 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     myview.cpp \
-    myplane.cpp
+    myplane.cpp \
+    gamecontroller.cpp
 
 HEADERS  += \
     myview.h \
-    myplane.h
+    myplane.h \
+    gamecontroller.h
 
 FORMS    +=
