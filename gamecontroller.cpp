@@ -143,30 +143,38 @@ void GameController::updateLife()
 
 bool GameController::eventFilter(QObject *obj, QEvent *event)
 {
-    if(event->type() == QEvent::KeyPress) {
-        QKeyEvent *key = (QKeyEvent*)event;
-        switch (key->key()) {
-        case Qt::Key_Left:
-            plane->moveLeft();
-            break;
-        case Qt::Key_Right:
-            plane->moveRight();
-            break;
-        case Qt::Key_Up:
-            plane->moveUp();
-            break;
-        case Qt::Key_Down:
-            plane->moveDown();
-            break;
-        case Qt::Key_Space:
-            QPointF p = plane->pos();
-            int len = getRank() * 10 + 1;
-            int n = getRank() / 3 + 1;
-            for(int i = 0; i < n; ++i)
-                shootBullet(QPointF(p.x()+qrand()%len-len/2, p.y()-15));
-            break;
-        }
+    if(event->type() == QEvent::KeyPress){
+        handleKeyPressed((QKeyEvent *)event);
+        return true;
+    }
+    if(event->type() == QEvent::KeyRelease) {
+        handleKeyReleased((QKeyEvent *)event);
+        return true;
     }
     return QObject::eventFilter(obj, event);
+}
+
+void GameController::handleKeyPressed(QKeyEvent *event)
+{
+    if(!event->isAutoRepeat()) {
+        int key = event->key();
+        if(key == Qt::Key_Left) plane->setSpeedX(-5);
+        if(key == Qt::Key_Right) plane->setSpeedX(5);
+        if(key == Qt::Key_Up) plane->setSpeedY(-5);
+        if(key == Qt::Key_Down) plane->setSpeedY(5);
+        if(key == Qt::Key_Space) plane->setFireStatus(true);
+    }
+}
+
+void GameController::handleKeyReleased(QKeyEvent *event)
+{
+    if(!event->isAutoRepeat()) {
+        int key = event->key();
+        if(key == Qt::Key_Left) plane->setSpeedX(0);
+        if(key == Qt::Key_Right) plane->setSpeedX(0);
+        if(key == Qt::Key_Up) plane->setSpeedY(0);
+        if(key == Qt::Key_Down) plane->setSpeedY(0);
+        if(key == Qt::Key_Space) plane->setFireStatus(false);
+    }
 }
 

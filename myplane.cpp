@@ -11,6 +11,7 @@ MyPlane::MyPlane(GameController &controller):
 {
     setData(GD_type, GO_MyPlane);
     pixMap.load(":/images/MyPlane.png");
+    speedX = speedY = isFireing = 0;
 }
 
 QRectF MyPlane::boundingRect() const
@@ -32,6 +33,11 @@ void MyPlane::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
 void MyPlane::advance(int phace)
 {
     if(!phace) return;
+    setPos(pos().x() + speedX, pos().y() + speedY);
+    if(isFireing){
+        int r = qrand() % 100;
+        if(r < 25) fire();
+    }
     handleCollisions();
 }
 
@@ -54,27 +60,27 @@ void MyPlane::handleCollisions()
     }
 }
 
-void MyPlane::moveLeft()
+void MyPlane::fire()
 {
-    QPointF cur = pos();
-    setPos(qMax(cur.x()-10, 0.0), cur.y());
+    qreal x = pos().x(), y = pos().y();
+    int len = controller.getRank() * 10 + 1;
+    int n = controller.getRank() / 2 + 1;
+    for(int i = 0; i < n; ++i)
+        controller.shootBullet(QPointF(x + qrand() % len - len/2, y - 15));
 }
 
-void MyPlane::moveRight()
+void MyPlane::setSpeedX(int x)
 {
-    QPointF cur = pos();
-    setPos(qMin(cur.x()+10, 500.0), cur.y());
+    speedX = x;
 }
 
-void MyPlane::moveUp()
+void MyPlane::setSpeedY(int y)
 {
-    QPointF cur = pos();
-    setPos(cur.x(), qMax(cur.y()-10, 100.0));
+    speedY = y;
 }
 
-void MyPlane::moveDown()
+void MyPlane::setFireStatus(bool can)
 {
-    QPointF cur = pos();
-    setPos(cur.x(), qMin(cur.y()+10, 600.0));
+    isFireing = can;
 }
 

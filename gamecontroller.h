@@ -2,8 +2,8 @@
 #define GAMECONTROLLER_H
 
 #include "constants.h"
-#include "myplane.h"
 #include "collision.h"
+#include "myplane.h"
 #include <QObject>
 #include <QTimer>
 #include <QList>
@@ -38,6 +38,8 @@ public slots:
     void updateLife();
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
+    void handleKeyPressed(QKeyEvent *event);
+    void handleKeyReleased(QKeyEvent *event);
 private:
     int score, life;
     bool gameIsRun;

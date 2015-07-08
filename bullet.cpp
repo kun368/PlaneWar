@@ -30,7 +30,7 @@ void Bullet::advance(int phace)
     if(!phace) return;
 
     QPointF cur = pos();
-    setPos(cur.x(), cur.y() - 5);
+    setPos(cur.x(), cur.y() - 8);
 
     if(pos().y() < 0) controller.removeItem(this);
 }
