@@ -41,7 +41,7 @@ void MyPlane::advance(int phace)
     if(pos().y() > viewHeight) setPos(pos().x(), viewHeight);
 
     if(isFireing){
-        if(isFireing % 5 == 1) fire();
+        if(isFireing % 5 == 1) fire(8);
         isFireing++;
     }
     handleCollisions();
@@ -66,13 +66,13 @@ void MyPlane::handleCollisions()
     }
 }
 
-void MyPlane::fire()
+void MyPlane::fire(int speed)
 {
     qreal x = pos().x(), y = pos().y();
     int len = controller.getRank() * 10 + 1;
     int n = controller.getRank() / 3 + 1;
     while(n--)
-        controller.shootBullet(QPointF(x + qrand() % len - len/2, y - 15));
+        controller.shootBullet(QPointF(x + qrand() % len - len/2, y - 15), speed);
 }
 
 void MyPlane::setSpeedX(int x)

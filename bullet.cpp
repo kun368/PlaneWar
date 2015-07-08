@@ -7,6 +7,7 @@ Bullet::Bullet(GameController &controller):
 {
     setData(GD_type, GO_Bullet);
     pixMap.load(":/images/Bullet.png");
+    speed = 8;
 }
 
 QRectF Bullet::boundingRect() const
@@ -30,8 +31,13 @@ void Bullet::advance(int phace)
     if(!phace) return;
 
     QPointF cur = pos();
-    setPos(cur.x(), cur.y() - 8);
+    setPos(cur.x(), cur.y() - speed);
 
     if(pos().y() < 0) controller.removeItem(this);
+}
+
+void Bullet::setSpeed(int x)
+{
+    speed = x;
 }
 

@@ -20,7 +20,7 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void advance(int phace);
     void handleCollisions();
-    void fire();
+    void fire(int speed);
     void setSpeedX(int x);
     void setSpeedY(int y);
     void setFireStatus(bool can);

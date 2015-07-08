@@ -33,7 +33,7 @@ public slots:
     void addEnemy();
     void ariseCollision(QPointF pos);
     void disappearCollision();
-    void shootBullet(QPointF pos);
+    void shootBullet(QPointF pos, int speed);
     void shootBall(QPointF pos);
     void updateLife();
 protected:

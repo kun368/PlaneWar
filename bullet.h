@@ -15,7 +15,9 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void advance(int phace);
+    void setSpeed(int x);
 private:
+    int speed;
     QPixmap pixMap;
     GameController &controller;
 };

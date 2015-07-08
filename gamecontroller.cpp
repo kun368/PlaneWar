@@ -117,10 +117,11 @@ void GameController::disappearCollision()
     }
 }
 
-void GameController::shootBullet(QPointF pos)
+void GameController::shootBullet(QPointF pos, int speed)
 {
     Bullet *tempBullet = new Bullet(*this);
     tempBullet->setPos(pos);
+    tempBullet->setSpeed(speed);
     scene->addItem(tempBullet);
 
     QSound *sound = new QSound(":/musics/Shoot.wav");
@@ -163,6 +164,7 @@ void GameController::handleKeyPressed(QKeyEvent *event)
 {
     if(!event->isAutoRepeat()) {
         int key = event->key();
+        if(key == Qt::Key_D) plane->fire(0);
         if(key == Qt::Key_Left) plane->setSpeedX(-5);
         if(key == Qt::Key_Right) plane->setSpeedX(5);
         if(key == Qt::Key_Up) plane->setSpeedY(-5);
