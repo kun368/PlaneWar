@@ -28,16 +28,21 @@ void GameController::removeItem(QGraphicsItem *item)
     scene->removeItem(item);
 }
 
-void GameController::updateText(int x)
+void GameController::updateText(int dscore)
 {
-    text->setZValue(0);
-    score += x;
+    text->setZValue(1);
+    score += dscore;
     QFont font;
     font.setBold(true);
     font.setPixelSize(22);
-    text->setDefaultTextColor(Qt::white);
+    text->setDefaultTextColor(Qt::yellow);
     text->setFont(font);
-    text->setPlainText(tr("得分:%1").arg(score));
+    text->setPlainText(tr("得分:%1  等级:%2  生命:%3").arg(score).arg(getRank()).arg(life));
+}
+
+int GameController::getRank()
+{
+    return score/2000.0 + 1;
 }
 
 void GameController::resume()
@@ -47,7 +52,7 @@ void GameController::resume()
     plane->setPos(240, 400);
     scene->addItem(plane);
 
-    score = 0;
+    score = 0; life = 3;
     text = new QGraphicsTextItem();
     text->setPos(10, 10);
     scene->addItem(text);
@@ -80,6 +85,7 @@ void GameController::addEnemy()
     tempEnemy->setPos(x, y);
     scene->addItem(tempEnemy);
     shootBall(QPointF(x, y + 30));
+    text->setZValue(1);
 }
 
 void GameController::ariseCollision(QPointF pos)
@@ -104,6 +110,7 @@ void GameController::shootBullet(QPointF pos)
     Bullet *tempBullet = new Bullet();
     tempBullet->setPos(pos);
     scene->addItem(tempBullet);
+    text->setZValue(1);
 }
 
 void GameController::shootBall(QPointF pos)
@@ -111,6 +118,15 @@ void GameController::shootBall(QPointF pos)
     Ball *tempBall = new Ball;
     tempBall->setPos(pos);
     scene->addItem(tempBall);
+    text->setZValue(1);
+}
+
+void GameController::updateLife()
+{
+    --life;
+    updateText(0);
+    if(life <= 0)
+        gameOver();
 }
 
 bool GameController::eventFilter(QObject *obj, QEvent *event)

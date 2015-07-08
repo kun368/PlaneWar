@@ -40,7 +40,8 @@ void MyPlane::handleCollisions()
     QList<QGraphicsItem *> collisions = collidingItems();
     foreach (QGraphicsItem *item, collisions) {
         if(item->data(GD_type) == GO_Ball) {
-            controller.gameOver();
+            controller.removeItem(item);
+            controller.updateLife();
             return;
         }
     }

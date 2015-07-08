@@ -21,7 +21,8 @@ public:
     explicit GameController(QGraphicsScene *scene, QObject *parent = 0);
     ~GameController();
     void removeItem(QGraphicsItem *item);
-    void updateText(int x);
+    void updateText(int dscore);
+    int getRank();
 signals:
     void exitApp();
 public slots:
@@ -33,10 +34,11 @@ public slots:
     void disappearCollision();
     void shootBullet(QPointF pos);
     void shootBall(QPointF pos);
+    void updateLife();
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
 private:
-    int score;
+    int score, life;
     bool gameIsRun;
     QList<Collision*> collis;
     QTimer timer, timerApperEnemy;
