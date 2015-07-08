@@ -7,13 +7,14 @@
 #include <QFont>
 #include <QTimer>
 #include <QMessageBox>
+#include <QSound>
 
 GameController::GameController(QGraphicsScene *scene, QObject *parent) :
     QObject(parent),
     scene(scene)
 {
       timer.start(1000/32);
-      timerApperEnemy.start(1000);
+      timerApperEnemy.start(2000);
       scene->installEventFilter(this);
       resume();
 }
@@ -95,6 +96,11 @@ void GameController::ariseCollision(QPointF pos)
     tempCollision->setPos(pos);
     scene->addItem(tempCollision);
     collis.push_back(tempCollision);
+
+    QSound *sound = new QSound(":/musics/Collision.wav");
+    sound->setLoops(1);
+    sound->play();
+
     QTimer::singleShot(200, this, SLOT(disappearCollision()));
 }
 
@@ -111,6 +117,11 @@ void GameController::shootBullet(QPointF pos)
     Bullet *tempBullet = new Bullet(*this);
     tempBullet->setPos(pos);
     scene->addItem(tempBullet);
+
+    QSound *sound = new QSound(":/musics/Shoot.wav");
+    sound->setLoops(1);
+    sound->play();
+
     text->setZValue(1);
 }
 

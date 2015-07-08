@@ -37,7 +37,7 @@
        </font>
       </property>
       <property name="text">
-       <string>飞机大战 V1.1</string>
+       <string>飞机大战 V1.2</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>

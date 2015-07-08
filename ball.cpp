@@ -32,6 +32,8 @@ void Ball::advance(int phace)
     if(!phace) return;
 
     QPointF cur = pos();
-    setPos(cur.x() + dirx, cur.y() + 5);
+    setPos(cur.x() + dirx, cur.y() + 7);
+
+    if(cur.y() > 600) controller.removeItem(this);
 }
 

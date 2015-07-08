@@ -4,8 +4,13 @@
 #include <QWidget>
 #include <QPixmap>
 
+
 MyView::MyView(QWidget *parent)
 {
+    sound = new QSound(":/musics/TheDawn.wav");
+    sound->setLoops(10);
+    sound->play();
+
     icon = new QIcon(":/images/Icon.png");
 
     setRenderHint(QPainter::Antialiasing); //抗锯齿

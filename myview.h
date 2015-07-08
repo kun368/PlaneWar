@@ -9,6 +9,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QIcon>
+#include <QSound>
 
 class MyView : public QGraphicsView
 {
@@ -17,6 +18,7 @@ public:
     explicit MyView(QWidget *parent = 0);
 private:
     QIcon *icon;
+    QSound *sound;
     QGraphicsScene *scene;
     MyPlane *plane;
     GameController *game;
