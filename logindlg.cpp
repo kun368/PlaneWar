@@ -19,5 +19,12 @@ LogInDlg::~LogInDlg()
 
 void LogInDlg::on_pushButton_start_clicked()
 {
+    loadmode = false;
+    accept();
+}
+
+void LogInDlg::on_pushButton_loadStart_clicked()
+{
+    loadmode = true;
     accept();
 }

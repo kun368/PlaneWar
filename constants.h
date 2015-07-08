@@ -1,6 +1,8 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+extern bool loadmode;
+
 enum GameObjectsData {
     GD_type
 };

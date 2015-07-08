@@ -1,7 +1,9 @@
 #include "bullet.h"
+#include "gamecontroller.h"
 #include <QPainter>
 
-Bullet::Bullet()
+Bullet::Bullet(GameController &controller):
+    controller(controller)
 {
     setData(GD_type, GO_Bullet);
     pixMap.load(":/images/Bullet.png");

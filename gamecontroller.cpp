@@ -52,7 +52,8 @@ void GameController::resume()
     plane->setPos(240, 400);
     scene->addItem(plane);
 
-    score = 0; life = 3;
+    life = loadmode ? 2147483647 : 10;
+    score = 0;
     text = new QGraphicsTextItem();
     text->setPos(10, 10);
     scene->addItem(text);
@@ -107,7 +108,7 @@ void GameController::disappearCollision()
 
 void GameController::shootBullet(QPointF pos)
 {
-    Bullet *tempBullet = new Bullet();
+    Bullet *tempBullet = new Bullet(*this);
     tempBullet->setPos(pos);
     scene->addItem(tempBullet);
     text->setZValue(1);
@@ -115,7 +116,7 @@ void GameController::shootBullet(QPointF pos)
 
 void GameController::shootBall(QPointF pos)
 {
-    Ball *tempBall = new Ball;
+    Ball *tempBall = new Ball(*this);
     tempBall->setPos(pos);
     scene->addItem(tempBall);
     text->setZValue(1);
@@ -148,7 +149,10 @@ bool GameController::eventFilter(QObject *obj, QEvent *event)
             break;
         case Qt::Key_Space:
             QPointF p = plane->pos();
-            shootBullet(QPointF(p.x(), p.y()-15));
+            int len = getRank() * 10 + 1;
+            int n = getRank() / 3 + 1;
+            for(int i = 0; i < n; ++i)
+                shootBullet(QPointF(p.x()+qrand()%len-len/2, p.y()-15));
             break;
         }
     }

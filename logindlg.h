@@ -1,6 +1,7 @@
 #ifndef LOGINDLG_H
 #define LOGINDLG_H
 
+#include "constants.h"
 #include <QDialog>
 
 namespace Ui {
@@ -17,6 +18,8 @@ public:
 
 private slots:
     void on_pushButton_start_clicked();
+
+    void on_pushButton_loadStart_clicked();
 
 private:
     Ui::LogInDlg *ui;

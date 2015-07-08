@@ -31,6 +31,10 @@ void Enemy::advance(int phace)
 
     QPointF cur = pos();
     setPos(cur.x(), cur.y() + 2);
+
+    int r = qrand() % 1000;
+    if(r < controller.getRank()*3) controller.shootBall(pos());
+
     handleCollisions();
 }
 

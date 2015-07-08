@@ -1,6 +1,7 @@
 #ifndef GAMECONTROLLER_H
 #define GAMECONTROLLER_H
 
+#include "constants.h"
 #include "myplane.h"
 #include "collision.h"
 #include <QObject>

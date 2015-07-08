@@ -42,6 +42,13 @@ void MyPlane::handleCollisions()
         if(item->data(GD_type) == GO_Ball) {
             controller.removeItem(item);
             controller.updateLife();
+            controller.ariseCollision(pos());
+            return;
+        }
+        if(item->data(GD_type) == GO_Enemy) {
+            controller.removeItem(item);
+            controller.updateLife();
+            controller.ariseCollision(pos());
             return;
         }
     }

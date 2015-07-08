@@ -6,15 +6,19 @@
 #include <QGraphicsItem>
 #include <QPixmap>
 
+class GameController;
+
 class Ball : public QGraphicsItem
 {
 public:
-    Ball();
+    Ball(GameController & controller);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void advance(int phace);
 private:
+    int dirx;
     QPixmap pixMap;
+    GameController &controller;
 };
 
 #endif // BALL_H

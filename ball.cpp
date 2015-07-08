@@ -1,11 +1,14 @@
 #include "ball.h"
+#include "gamecontroller.h"
 
 #include <QPainter>
 
-Ball::Ball()
+Ball::Ball(GameController &controller):
+    controller(controller)
 {
     setData(GD_type, GO_Ball);
     pixMap.load(":/images/Ball1.BMP");
+    dirx = qrand() % 6 - 3;
 }
 
 QRectF Ball::boundingRect() const
@@ -29,6 +32,6 @@ void Ball::advance(int phace)
     if(!phace) return;
 
     QPointF cur = pos();
-    setPos(cur.x(), cur.y() + 5);
+    setPos(cur.x() + dirx, cur.y() + 5);
 }
 

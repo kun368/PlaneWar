@@ -20,7 +20,8 @@ SOURCES += main.cpp \
     bullet.cpp \
     ball.cpp \
     logindlg.cpp \
-    collision.cpp
+    collision.cpp \
+    constants.cpp
 
 HEADERS  += \
     myview.h \
