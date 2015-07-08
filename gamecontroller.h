@@ -4,6 +4,7 @@
 #include "constants.h"
 #include "collision.h"
 #include "myplane.h"
+#include "flowback.h"
 #include <QObject>
 #include <QTimer>
 #include <QList>
@@ -27,15 +28,15 @@ public:
 signals:
     void exitApp();
 public slots:
-    void resume();
-    void pause();
+    void startGame();
     void gameOver();
     void addEnemy();
+    void addLifeAdder();
     void ariseCollision(QPointF pos);
     void disappearCollision();
     void shootBullet(QPointF pos, int speed);
     void shootBall(QPointF pos);
-    void updateLife();
+    void updateLife(int dlife);
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
     void handleKeyPressed(QKeyEvent *event);
@@ -44,7 +45,8 @@ private:
     int score, life;
     bool gameIsRun;
     QList<Collision*> collis;
-    QTimer timer, timerApperEnemy;
+    QTimer timer, timerApperEnemy, timerApperLifeAdder;
+    FlowBack *back;
     QGraphicsScene *scene;
     MyPlane *plane;
     QGraphicsTextItem *text;

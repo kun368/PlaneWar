@@ -22,7 +22,8 @@ SOURCES += main.cpp \
     logindlg.cpp \
     collision.cpp \
     constants.cpp \
-    flowback.cpp
+    flowback.cpp \
+    lifeadder.cpp
 
 HEADERS  += \
     myview.h \
@@ -34,7 +35,8 @@ HEADERS  += \
     constants.h \
     logindlg.h \
     collision.h \
-    flowback.h
+    flowback.h \
+    lifeadder.h
 
 FORMS    += \
     logindlg.ui
@@ -43,3 +45,5 @@ DISTFILES +=
 
 RESOURCES += \
     res.qrc
+
+RC_FILE  += myico.rc

@@ -8,6 +8,7 @@
         <file>Icon.png</file>
         <file>Collision.png</file>
         <file>background.png</file>
+        <file>LifeAdder.png</file>
     </qresource>
     <qresource prefix="/musics">
         <file>Collision.wav</file>

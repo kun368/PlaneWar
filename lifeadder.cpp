@@ -1,22 +1,22 @@
-#include "ball.h"
+#include "lifeadder.h"
 #include "gamecontroller.h"
 #include <QPainter>
 
-Ball::Ball(GameController &controller):
+
+LifeAdder::LifeAdder(GameController &controller):
     controller(controller)
 {
-    setData(GD_type, GO_Ball);
-    pixMap.load(":/images/Ball1.BMP");
-    dirx = qrand() % 6 - 3;
+    setData(GD_type, GO_LifeAdder);
+    pixMap.load(":/images/LifeAdder.png");
 }
 
-QRectF Ball::boundingRect() const
+QRectF LifeAdder::boundingRect() const
 {
     int w = pixMap.width(), h = pixMap.height();
     return QRectF(-w/2, -h/2, w, h);
 }
 
-void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void LifeAdder::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     if(!pixMap.isNull()) {
         painter->save();
@@ -26,13 +26,12 @@ void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     }
 }
 
-void Ball::advance(int phace)
+void LifeAdder::advance(int phace)
 {
     if(!phace) return;
 
     QPointF cur = pos();
-    setPos(cur.x() + dirx, cur.y() + 7);
+    setPos(cur.x(), cur.y() + 5);
 
     if(cur.y() > viewHeight) controller.removeItem(this);
 }
-

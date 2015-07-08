@@ -10,6 +10,11 @@ FlowBack::FlowBack(GameController &controller):
     pixMap.load(":/images/background.png");
 }
 
+FlowBack::~FlowBack()
+{
+
+}
+
 QRectF FlowBack::boundingRect() const
 {
     return QRectF(0, 0, pixMap.width(), viewHeight);

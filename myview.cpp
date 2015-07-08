@@ -6,10 +6,11 @@
 #include <QPixmap>
 
 
-MyView::MyView(QWidget *parent)
+MyView::MyView(QWidget *parent):
+    QGraphicsView(parent)
 {
     sound = new QSound(":/musics/TheDawn.wav");
-    sound->setLoops(10);
+    sound->setLoops(1000);
     sound->play();
 
     icon = new QIcon(":/images/Icon.png");
@@ -17,12 +18,12 @@ MyView::MyView(QWidget *parent)
     setRenderHint(QPainter::Antialiasing); //抗锯齿
     setMinimumSize(viewWidth + 10, viewHeight + 10);  //设置窗口
     setMaximumSize(viewWidth + 10, viewHeight + 10);
-    setWindowTitle(tr("飞机大战"));
+    if(loadmode) setWindowTitle(tr("飞机大战 [上帝模式]"));
+    else setWindowTitle(tr("飞机大战"));
     setWindowIcon(*icon);
 
     scene = new QGraphicsScene;
     scene->setSceneRect(0, 0, viewWidth, viewHeight);
-    // scene->setBackgroundBrush(QPixmap(":/images/background.jpg")); //设置背景
     setScene(scene);
 
     game = new GameController(scene, this);

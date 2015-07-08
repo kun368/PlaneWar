@@ -110,9 +110,8 @@
 ① ↑↓←→控制战机方向
 ② 空格发射子弹
 ③ D键放置地雷
-④ 发射一颗子弹消耗30积分
-⑤ 升级可以触发高级特效
-⑥ 上帝模式有无限生命</string>
+④ 升级可以触发高级特效
+⑤ 上帝模式有无限生命</string>
    </property>
    <property name="wordWrap">
     <bool>true</bool>

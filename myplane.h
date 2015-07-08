@@ -25,6 +25,7 @@ public:
     void setSpeedY(int y);
     void setFireStatus(bool can);
 private:
+    qreal getScale() const;
     int speedX, speedY, isFireing;
     GameController &controller;
     QPixmap pixMap;

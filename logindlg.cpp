@@ -10,6 +10,7 @@ LogInDlg::LogInDlg(QWidget *parent) :
     connect(ui->pushButton_exit, SIGNAL(clicked(bool)), this, SLOT(close()));
     QIcon icon(":/images/Icon.png");
     setWindowIcon(icon);
+    setFixedSize(width(), height());
 }
 
 LogInDlg::~LogInDlg()

@@ -48,6 +48,7 @@ void Enemy::handleCollisions()
             controller.updateText(100 + qrand() % 50);
             controller.removeItem(this);
             controller.ariseCollision(pos());
+            controller.removeItem(item);
             return;
         }
     }

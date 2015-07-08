@@ -4,6 +4,7 @@
 #include "ball.h"
 #include "collision.h"
 #include "flowback.h"
+#include "lifeadder.h"
 #include <QDebug>
 #include <QFont>
 #include <QTimer>
@@ -14,13 +15,11 @@ GameController::GameController(QGraphicsScene *scene, QObject *parent) :
     QObject(parent),
     scene(scene)
 {
-    FlowBack *back = new FlowBack(*this); //添加流动背景
-    scene->addItem(back);
-
     timer.start(1000/33);
     timerApperEnemy.start(1000);
+    timerApperLifeAdder.start(7000);
     scene->installEventFilter(this);
-    resume();
+    startGame();
 }
 
 GameController::~GameController()
@@ -51,14 +50,17 @@ int GameController::getRank()
     return score/2000.0 + 1;
 }
 
-void GameController::resume()
+void GameController::startGame()
 {
-    plane = new MyPlane(*this);
+    back = new FlowBack(*this);   //添加流动背景
+    scene->addItem(back);
+
+    plane = new MyPlane(*this);      //唯一我的飞机
     plane->setFocus();
     plane->setPos(viewWidth/2, 400);
     scene->addItem(plane);
 
-    life = loadmode ? 2147483647 : 10;
+    life = loadmode ? 999999 : 5;    //初始化分数
     score = 0;
     text = new QGraphicsTextItem();
     text->setPos(10, 10);
@@ -67,31 +69,35 @@ void GameController::resume()
 
     connect(&timer, SIGNAL(timeout()), scene, SLOT(advance()));
     connect(&timerApperEnemy, SIGNAL(timeout()), this, SLOT(addEnemy()));
-}
-
-void GameController::pause()
-{
-    scene->clear();
-    disconnect(&timer, SIGNAL(timeout()), scene, SLOT(advance()));
-    disconnect(&timerApperEnemy, SIGNAL(timeout()), this, SLOT(addEnemy()));
+    connect(&timerApperLifeAdder, SIGNAL(timeout()), this, SLOT(addLifeAdder()));
 }
 
 void GameController::gameOver()
 {
-    pause();
-    QString msg(tr("你已经挂了,得分是：%1\n是否重新开始游戏？").arg(score));
-    int ret = QMessageBox::question(0, tr("提示"), msg, QMessageBox::Yes, QMessageBox::No);
-    if(ret == QMessageBox::Yes) resume();
-    else emit exitApp();
+    disconnect(&timer, SIGNAL(timeout()), scene, SLOT(advance()));
+    disconnect(&timerApperEnemy, SIGNAL(timeout()), this, SLOT(addEnemy()));
+    disconnect(&timerApperLifeAdder, SIGNAL(timeout()), this, SLOT(addLifeAdder()));
+    QString msg(tr("你已经挂了,得分是：%1").arg(score));
+    int ret = QMessageBox::question(0, tr("提示"), msg, QMessageBox::Yes);
+    emit exitApp();
 }
 
 void GameController::addEnemy()
 {
-    int x = qrand() % 500, y = 1;
+    int x = qrand() % viewWidth, y = 1;
     Enemy *tempEnemy = new Enemy(*this);
     tempEnemy->setPos(x, y);
     scene->addItem(tempEnemy);
     shootBall(QPointF(x, y + 30));
+    text->setZValue(1);
+}
+
+void GameController::addLifeAdder()
+{
+    int x = qrand() % viewWidth, y = 1;
+    LifeAdder *temp = new LifeAdder(*this);
+    temp->setPos(x, y);
+    scene->addItem(temp);
     text->setZValue(1);
 }
 
@@ -128,7 +134,7 @@ void GameController::shootBullet(QPointF pos, int speed)
     sound->setLoops(1);
     sound->play();
 
-    updateText(-30);
+    updateText(-10);
 }
 
 void GameController::shootBall(QPointF pos)
@@ -139,9 +145,9 @@ void GameController::shootBall(QPointF pos)
     text->setZValue(1);
 }
 
-void GameController::updateLife()
+void GameController::updateLife(int dlife)
 {
-    --life;
+    life += dlife;
     updateText(0);
     if(life <= 0)
         gameOver();
@@ -165,10 +171,10 @@ void GameController::handleKeyPressed(QKeyEvent *event)
     if(!event->isAutoRepeat()) {
         int key = event->key();
         if(key == Qt::Key_D) plane->fire(0);
-        if(key == Qt::Key_Left) plane->setSpeedX(-5);
-        if(key == Qt::Key_Right) plane->setSpeedX(5);
-        if(key == Qt::Key_Up) plane->setSpeedY(-5);
-        if(key == Qt::Key_Down) plane->setSpeedY(5);
+        if(key == Qt::Key_Left) plane->setSpeedX(-8);
+        if(key == Qt::Key_Right) plane->setSpeedX(8);
+        if(key == Qt::Key_Up) plane->setSpeedY(-8);
+        if(key == Qt::Key_Down) plane->setSpeedY(8);
         if(key == Qt::Key_Space) plane->setFireStatus(true);
     }
 }
@@ -184,4 +190,3 @@ void GameController::handleKeyReleased(QKeyEvent *event)
         if(key == Qt::Key_Space) plane->setFireStatus(false);
     }
 }
-
