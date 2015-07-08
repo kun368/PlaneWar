@@ -34,9 +34,15 @@ void MyPlane::advance(int phace)
 {
     if(!phace) return;
     setPos(pos().x() + speedX, pos().y() + speedY);
+
+    if(pos().x() < 0) setPos(0, pos().y());
+    if(pos().x() > viewWidth) setPos(viewWidth, pos().y());
+    if(pos().y() < 0) setPos(pos().x(), 0);
+    if(pos().y() > viewHeight) setPos(pos().x(), viewHeight);
+
     if(isFireing){
-        int r = qrand() % 100;
-        if(r < 25) fire();
+        if(isFireing % 5 == 1) fire();
+        isFireing++;
     }
     handleCollisions();
 }
@@ -64,8 +70,8 @@ void MyPlane::fire()
 {
     qreal x = pos().x(), y = pos().y();
     int len = controller.getRank() * 10 + 1;
-    int n = controller.getRank() / 2 + 1;
-    for(int i = 0; i < n; ++i)
+    int n = controller.getRank() / 3 + 1;
+    while(n--)
         controller.shootBullet(QPointF(x + qrand() % len - len/2, y - 15));
 }
 
@@ -81,6 +87,7 @@ void MyPlane::setSpeedY(int y)
 
 void MyPlane::setFireStatus(bool can)
 {
-    isFireing = can;
+    if(isFireing == 0 && can) isFireing = 1;
+    else if(isFireing > 0 && !can) isFireing = 0;
 }
 

@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     ball.cpp \
     logindlg.cpp \
     collision.cpp \
-    constants.cpp
+    constants.cpp \
+    flowback.cpp
 
 HEADERS  += \
     myview.h \
@@ -32,7 +33,8 @@ HEADERS  += \
     ball.h \
     constants.h \
     logindlg.h \
-    collision.h
+    collision.h \
+    flowback.h
 
 FORMS    += \
     logindlg.ui

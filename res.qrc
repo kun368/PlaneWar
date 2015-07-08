@@ -5,9 +5,9 @@
         <file>Enemy.png</file>
         <file>MyPlane.png</file>
         <file>Ball1.BMP</file>
-        <file>background.jpg</file>
         <file>Icon.png</file>
         <file>Collision.png</file>
+        <file>background.png</file>
     </qresource>
     <qresource prefix="/musics">
         <file>Collision.wav</file>

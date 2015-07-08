@@ -3,6 +3,7 @@
 #include "bullet.h"
 #include "ball.h"
 #include "collision.h"
+#include "flowback.h"
 #include <QDebug>
 #include <QFont>
 #include <QTimer>
@@ -13,10 +14,13 @@ GameController::GameController(QGraphicsScene *scene, QObject *parent) :
     QObject(parent),
     scene(scene)
 {
-      timer.start(1000/32);
-      timerApperEnemy.start(2000);
-      scene->installEventFilter(this);
-      resume();
+    FlowBack *back = new FlowBack(*this); //添加流动背景
+    scene->addItem(back);
+
+    timer.start(1000/33);
+    timerApperEnemy.start(1000);
+    scene->installEventFilter(this);
+    resume();
 }
 
 GameController::~GameController()
@@ -43,6 +47,7 @@ void GameController::updateText(int dscore)
 
 int GameController::getRank()
 {
+    if(score <= 0) return 1;
     return score/2000.0 + 1;
 }
 
@@ -50,7 +55,7 @@ void GameController::resume()
 {
     plane = new MyPlane(*this);
     plane->setFocus();
-    plane->setPos(240, 400);
+    plane->setPos(viewWidth/2, 400);
     scene->addItem(plane);
 
     life = loadmode ? 2147483647 : 10;
@@ -106,7 +111,7 @@ void GameController::ariseCollision(QPointF pos)
 
 void GameController::disappearCollision()
 {
-    if(!collis.isEmpty()){
+    if(!collis.isEmpty()) {
         Collision* tempCollision = collis.takeFirst();
         scene->removeItem(tempCollision);
     }
@@ -122,7 +127,7 @@ void GameController::shootBullet(QPointF pos)
     sound->setLoops(1);
     sound->play();
 
-    text->setZValue(1);
+    updateText(-30);
 }
 
 void GameController::shootBall(QPointF pos)
