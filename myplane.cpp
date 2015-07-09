@@ -4,6 +4,7 @@
 #include <QtAlgorithms>
 #include <QList>
 #include <QDebug>
+#include <QtAlgorithms>
 
 
 MyPlane::MyPlane(GameController &controller):
@@ -35,15 +36,15 @@ void MyPlane::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
 void MyPlane::advance(int phace)
 {
     if(!phace) return;
+    // 设置战机位置，放置超出屏幕
     setPos(pos().x() + speedX, pos().y() + speedY);
-
     if(pos().x() < 0) setPos(0, pos().y());
     if(pos().x() > viewWidth) setPos(viewWidth, pos().y());
     if(pos().y() < 0) setPos(pos().x(), 0);
     if(pos().y() > viewHeight) setPos(pos().x(), viewHeight);
 
-    if(isFireing){
-        if(isFireing % 5 == 1) fire(8);
+    if(isFireing) {
+        if(isFireing % 5  == 1) fire(8);
         isFireing++;
     }
     handleCollisions();
@@ -101,7 +102,6 @@ void MyPlane::setFireStatus(bool can)
 qreal MyPlane::getScale() const
 {
     qreal s = controller.getRank();
-    qreal scale = s/5.0 + 0.7;
-    return scale;
+    return qMin(s/5.0 + 0.7, 2.0);
 }
 

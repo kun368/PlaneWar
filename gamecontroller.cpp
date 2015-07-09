@@ -16,8 +16,8 @@ GameController::GameController(QGraphicsScene *scene, QObject *parent) :
     scene(scene)
 {
     timer.start(1000/33);
-    timerApperEnemy.start(1000);
-    timerApperLifeAdder.start(7000);
+    timerApperEnemy.start(1500);
+    timerApperLifeAdder.start(10000);
     scene->installEventFilter(this);
     startGame();
 }
@@ -35,12 +35,9 @@ void GameController::removeItem(QGraphicsItem *item)
 void GameController::updateText(int dscore)
 {
     text->setZValue(1);
-    score += dscore;
-    QFont font;
-    font.setBold(true);
-    font.setPixelSize(22);
-    text->setDefaultTextColor(Qt::yellow);
-    text->setFont(font);
+    if(!loadmode || dscore > 0)   //上帝模式不减分数
+        score += dscore;
+    if(score < 0) gameOver();
     text->setPlainText(tr("得分:%1  等级:%2  生命:%3").arg(score).arg(getRank()).arg(life));
 }
 
@@ -48,6 +45,18 @@ int GameController::getRank()
 {
     if(score <= 0) return 1;
     return score/2000.0 + 1;
+}
+
+void GameController::clearAllEnemy()
+{
+    updateText(-800);   //一个清屏大招消耗800积分
+    QList<QGraphicsItem *> items = scene->items(QRectF(0, 0, viewWidth, viewHeight));
+    foreach (QGraphicsItem *it, items) {
+        if(it->data(GD_type) == GO_Ball || it->data(GD_type) == GO_Enemy) {
+            removeItem(it);
+            ariseCollision(it->pos());
+        }
+    }
 }
 
 void GameController::startGame()
@@ -60,9 +69,14 @@ void GameController::startGame()
     plane->setPos(viewWidth/2, 400);
     scene->addItem(plane);
 
-    life = loadmode ? 999999 : 5;    //初始化分数
+    life = loadmode ? 999999 : 3;    //初始化显示分数
     score = 0;
     text = new QGraphicsTextItem();
+    font = new QFont();
+    font->setBold(true);
+    font->setPixelSize(22);
+    text->setDefaultTextColor(Qt::yellow);
+    text->setFont(*font);
     text->setPos(10, 10);
     scene->addItem(text);
     updateText(1000);
@@ -77,8 +91,7 @@ void GameController::gameOver()
     disconnect(&timer, SIGNAL(timeout()), scene, SLOT(advance()));
     disconnect(&timerApperEnemy, SIGNAL(timeout()), this, SLOT(addEnemy()));
     disconnect(&timerApperLifeAdder, SIGNAL(timeout()), this, SLOT(addLifeAdder()));
-    QString msg(tr("你已经挂了,得分是：%1").arg(score));
-    int ret = QMessageBox::question(0, tr("提示"), msg, QMessageBox::Yes);
+    QMessageBox::question(0, tr("提示"), tr("你已经挂了,得分是：%1").arg(score), QMessageBox::Yes);
     emit exitApp();
 }
 
@@ -134,7 +147,7 @@ void GameController::shootBullet(QPointF pos, int speed)
     sound->setLoops(1);
     sound->play();
 
-    updateText(-10);
+    updateText(-30);
 }
 
 void GameController::shootBall(QPointF pos)
@@ -149,8 +162,7 @@ void GameController::updateLife(int dlife)
 {
     life += dlife;
     updateText(0);
-    if(life <= 0)
-        gameOver();
+    if(life <= 0) gameOver();
 }
 
 bool GameController::eventFilter(QObject *obj, QEvent *event)
@@ -170,6 +182,7 @@ void GameController::handleKeyPressed(QKeyEvent *event)
 {
     if(!event->isAutoRepeat()) {
         int key = event->key();
+        if(key == Qt::Key_B) clearAllEnemy();
         if(key == Qt::Key_D) plane->fire(0);
         if(key == Qt::Key_Left) plane->setSpeedX(-8);
         if(key == Qt::Key_Right) plane->setSpeedX(8);

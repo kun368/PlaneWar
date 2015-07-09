@@ -1,12 +1,17 @@
 #include "enemy.h"
 #include "gamecontroller.h"
 #include <QPainter>
+#include <QGraphicsColorizeEffect>
 
 Enemy::Enemy(GameController &controller):
     controller(controller)
 {
     setData(GD_type, GO_Enemy);
     pixMap.load(":/images/Enemy.png");
+
+    QGraphicsColorizeEffect * effect = new QGraphicsColorizeEffect;
+    effect->setColor(QColor(qrand()%256, qrand()%256, qrand()%256));
+    setGraphicsEffect(effect);
 }
 
 QRectF Enemy::boundingRect() const

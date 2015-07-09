@@ -1,6 +1,8 @@
 #include "logindlg.h"
 #include "ui_logindlg.h"
 #include <QIcon>
+#include <QTextEdit>
+#include <QPalette>
 
 LogInDlg::LogInDlg(QWidget *parent) :
     QDialog(parent),
@@ -10,7 +12,12 @@ LogInDlg::LogInDlg(QWidget *parent) :
     connect(ui->pushButton_exit, SIGNAL(clicked(bool)), this, SLOT(close()));
     QIcon icon(":/images/Icon.png");
     setWindowIcon(icon);
+    setWindowOpacity(0.9);
     setFixedSize(width(), height());
+
+    QPalette pl = ui->textEdit->palette();
+    pl.setBrush(QPalette::Base,QBrush(QColor(255,0,0,0)));
+    ui->textEdit->setPalette(pl);
 }
 
 LogInDlg::~LogInDlg()

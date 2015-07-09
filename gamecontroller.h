@@ -6,6 +6,7 @@
 #include "myplane.h"
 #include "flowback.h"
 #include <QObject>
+#include <QFont>
 #include <QTimer>
 #include <QList>
 #include <QKeyEvent>
@@ -28,6 +29,7 @@ public:
 signals:
     void exitApp();
 public slots:
+    void clearAllEnemy();
     void startGame();
     void gameOver();
     void addEnemy();
@@ -49,6 +51,7 @@ private:
     FlowBack *back;
     QGraphicsScene *scene;
     MyPlane *plane;
+    QFont *font;
     QGraphicsTextItem *text;
 };
 

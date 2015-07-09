@@ -17,9 +17,8 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void advance(int phace);
-    QPainterPath shape() const;
 private:
-    int cur;
+    int cur, up;
     QPixmap pixMap;
     GameController &controller;
 };
