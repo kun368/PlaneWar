@@ -10,7 +10,7 @@ Circle::Circle(GameController &controller):
 {
     setData(GD_type, GO_Circle);
     pixMap.load(":/images/Circle.png");
-    qDebug() << "111";
+    cur = 0;
 }
 
 QRectF Circle::boundingRect() const
@@ -25,6 +25,7 @@ void Circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
         painter->save();
         painter->scale(0.7, 0.7);
         int w = pixMap.width(), h = pixMap.height();
+        painter->rotate(cur);
         painter->drawPixmap(QPoint(-w/2, -h/2), pixMap);
         painter->restore();
     }
@@ -34,6 +35,7 @@ void Circle::advance(int phace)
 {
     if(!phace) return;
     setPos(controller.getPlanePos());
+    cur = (cur+10) % 360;
     handleCollisions();
 }
 

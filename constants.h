@@ -1,8 +1,11 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-extern bool loadmode;
+#include <QString>
 
+extern bool loadmode;
+extern QString backgroundName;
+extern bool backgroundLoop;
 extern const int viewHeight;
 extern const int viewWidth;
 

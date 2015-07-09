@@ -17,6 +17,7 @@ public:
     void advance(int phace);
     void handleCollisions();
 private:
+    int cur;
     QPixmap pixMap;
     GameController &controller;
 };
