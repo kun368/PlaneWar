@@ -12,7 +12,7 @@ LogInDlg::LogInDlg(QWidget *parent) :
     connect(ui->pushButton_exit, SIGNAL(clicked(bool)), this, SLOT(close()));
     QIcon icon(":/images/Icon.png");
     setWindowIcon(icon);
-    setWindowOpacity(0.9);
+    setWindowOpacity(0.95);
     setFixedSize(width(), height());
 
     QPalette pl = ui->textEdit->palette();

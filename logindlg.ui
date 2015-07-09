@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>379</width>
-    <height>317</height>
+    <height>327</height>
    </rect>
   </property>
   <property name="font">
@@ -67,7 +67,7 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>270</y>
+     <y>280</y>
      <width>261</width>
      <height>29</height>
     </rect>
@@ -101,8 +101,8 @@
     <rect>
      <x>30</x>
      <y>80</y>
-     <width>311</width>
-     <height>171</height>
+     <width>321</width>
+     <height>191</height>
     </rect>
    </property>
    <property name="readOnly">
@@ -118,9 +118,10 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2. &lt;span style=&quot; color:#00aa00;&quot;&gt;空格&lt;/span&gt;发射子弹，消耗30积分&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3. &lt;span style=&quot; color:#00aa00;&quot;&gt;D键&lt;/span&gt;放置地雷，消耗30积分&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4. &lt;span style=&quot; color:#00aa00;&quot;&gt;B键&lt;/span&gt;触发清屏大招，消耗800积分&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;5. 触碰&lt;span style=&quot; color:#0000ff;&quot;&gt;补给箱&lt;/span&gt;可以增加生命&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;5. &lt;span style=&quot; color:#5500ff;&quot;&gt;升级&lt;/span&gt;可增大战机，获得多重子弹&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;6. &lt;span style=&quot; color:#f81504;&quot;&gt;上帝模式&lt;/span&gt;有无限生命，不消耗积分&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;5. &lt;span style=&quot; color:#00aa00;&quot;&gt;M键&lt;/span&gt;增加光环防护罩，持续15秒，消耗1000积分&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;6. 触碰&lt;span style=&quot; color:#0000ff;&quot;&gt;补给箱&lt;/span&gt;可以增加生命&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;7. &lt;span style=&quot; color:#5500ff;&quot;&gt;升级&lt;/span&gt;可增大战机，获得多重子弹&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;8. &lt;span style=&quot; color:#f81504;&quot;&gt;上帝模式&lt;/span&gt;有无限生命，不消耗积分&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
  </widget>

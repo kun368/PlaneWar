@@ -17,7 +17,8 @@ enum GameObjectTypes {
     GO_MyPlane,
     GO_Collision,
     GO_FlowBack,
-    GO_LifeAdder
+    GO_LifeAdder,
+    GO_Circle
 };
 
 #endif // CONSTANTS_H

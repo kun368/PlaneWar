@@ -5,6 +5,7 @@
 #include "collision.h"
 #include "flowback.h"
 #include "lifeadder.h"
+#include "circle.h"
 #include <QDebug>
 #include <QFont>
 #include <QTimer>
@@ -47,6 +48,11 @@ int GameController::getRank()
     return score/2000.0 + 1;
 }
 
+QPointF GameController::getPlanePos()
+{
+    return plane->pos();
+}
+
 void GameController::clearAllEnemy()
 {
     updateText(-800);   //一个清屏大招消耗800积分
@@ -68,6 +74,11 @@ void GameController::startGame()
     plane->setFocus();
     plane->setPos(viewWidth/2, 400);
     scene->addItem(plane);
+
+    circle = new Circle(*this);    //初始化光环
+    circle->setPos(100, 100);
+    scene->addItem(circle);
+    QTimer::singleShot(15000, this, SLOT(disappearCircle()));
 
     life = loadmode ? 999999 : 3;    //初始化显示分数
     score = 0;
@@ -112,6 +123,18 @@ void GameController::addLifeAdder()
     temp->setPos(x, y);
     scene->addItem(temp);
     text->setZValue(1);
+}
+
+void GameController::addCircle()
+{
+    updateText(-1000);
+    scene->addItem(circle);
+    QTimer::singleShot(15000, this, SLOT(disappearCircle()));
+}
+
+void GameController::disappearCircle()
+{
+    scene->removeItem(circle);
 }
 
 void GameController::ariseCollision(QPointF pos)
@@ -167,7 +190,7 @@ void GameController::updateLife(int dlife)
 
 bool GameController::eventFilter(QObject *obj, QEvent *event)
 {
-    if(event->type() == QEvent::KeyPress){
+    if(event->type() == QEvent::KeyPress) {
         handleKeyPressed((QKeyEvent *)event);
         return true;
     }
@@ -182,6 +205,7 @@ void GameController::handleKeyPressed(QKeyEvent *event)
 {
     if(!event->isAutoRepeat()) {
         int key = event->key();
+        if(key == Qt::Key_M) addCircle();
         if(key == Qt::Key_B) clearAllEnemy();
         if(key == Qt::Key_D) plane->fire(0);
         if(key == Qt::Key_Left) plane->setSpeedX(-8);

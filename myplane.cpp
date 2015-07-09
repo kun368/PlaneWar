@@ -18,7 +18,6 @@ MyPlane::MyPlane(GameController &controller):
 QRectF MyPlane::boundingRect() const
 {
     qreal w = pixMap.width(), h = pixMap.height();
-    w *= getScale(); h *= getScale();
     return QRectF(-w/2, -h/2, w, h);
 }
 
@@ -26,7 +25,6 @@ void MyPlane::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
 {
     if(!pixMap.isNull()) {
         painter->save();
-        painter->scale(getScale(), getScale());
         int w = pixMap.width(), h = pixMap.height();
         painter->drawPixmap(QPoint(-w/2, -h/2), pixMap);
         painter->restore();
@@ -97,11 +95,5 @@ void MyPlane::setFireStatus(bool can)
 {
     if(isFireing == 0 && can) isFireing = 1;
     else if(isFireing > 0 && !can) isFireing = 0;
-}
-
-qreal MyPlane::getScale() const
-{
-    qreal s = controller.getRank();
-    return qMin(s/5.0 + 0.7, 2.0);
 }
 

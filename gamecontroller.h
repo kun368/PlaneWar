@@ -4,9 +4,11 @@
 #include "constants.h"
 #include "collision.h"
 #include "myplane.h"
+#include "circle.h"
 #include "flowback.h"
 #include <QObject>
 #include <QFont>
+#include <QRectF>
 #include <QTimer>
 #include <QList>
 #include <QKeyEvent>
@@ -26,6 +28,7 @@ public:
     void removeItem(QGraphicsItem *item);
     void updateText(int dscore);
     int getRank();
+    QPointF getPlanePos();
 signals:
     void exitApp();
 public slots:
@@ -34,6 +37,8 @@ public slots:
     void gameOver();
     void addEnemy();
     void addLifeAdder();
+    void addCircle();
+    void disappearCircle();
     void ariseCollision(QPointF pos);
     void disappearCollision();
     void shootBullet(QPointF pos, int speed);
@@ -51,6 +56,7 @@ private:
     FlowBack *back;
     QGraphicsScene *scene;
     MyPlane *plane;
+    Circle *circle;
     QFont *font;
     QGraphicsTextItem *text;
 };

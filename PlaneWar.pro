@@ -23,7 +23,8 @@ SOURCES += main.cpp \
     collision.cpp \
     constants.cpp \
     flowback.cpp \
-    lifeadder.cpp
+    lifeadder.cpp \
+    circle.cpp
 
 HEADERS  += \
     myview.h \
@@ -36,7 +37,8 @@ HEADERS  += \
     logindlg.h \
     collision.h \
     flowback.h \
-    lifeadder.h
+    lifeadder.h \
+    circle.h
 
 FORMS    += \
     logindlg.ui
