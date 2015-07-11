@@ -21,7 +21,8 @@ enum GameObjectTypes {
     GO_Collision,
     GO_FlowBack,
     GO_LifeAdder,
-    GO_Circle
+    GO_Circle,
+    GO_Boss
 };
 
 #endif // CONSTANTS_H

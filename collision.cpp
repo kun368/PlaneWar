@@ -15,6 +15,7 @@ QRectF Collision::boundingRect() const
 
 void Collision::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_UNUSED(option); Q_UNUSED(widget);
     if(!pixMap.isNull()) {
         painter->save();
         int w = pixMap.width(), h = pixMap.height();

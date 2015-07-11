@@ -14,6 +14,8 @@
         <file>bg2.jpg</file>
         <file>bg3.jpg</file>
         <file>bg4.jpg</file>
+        <file>Boss.png</file>
+        <file>BossBall.png</file>
     </qresource>
     <qresource prefix="/musics">
         <file>Collision.wav</file>

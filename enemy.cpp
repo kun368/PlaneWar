@@ -22,6 +22,7 @@ QRectF Enemy::boundingRect() const
 
 void Enemy::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_UNUSED(option); Q_UNUSED(widget);
     if(!pixMap.isNull()) {
         painter->save();
         int w = pixMap.width(), h = pixMap.height();

@@ -2,6 +2,7 @@
 #include "enemy.h"
 #include "bullet.h"
 #include "ball.h"
+#include "boss.h"
 #include "collision.h"
 #include "flowback.h"
 #include "lifeadder.h"
@@ -19,6 +20,7 @@ GameController::GameController(QGraphicsScene *scene, QObject *parent) :
     timer.start(1000/33);
     timerApperEnemy.start(1500);
     timerApperLifeAdder.start(10000);
+    timerAddBoss.start(40000);
     scene->installEventFilter(this);
     startGame();
 }
@@ -47,18 +49,12 @@ int GameController::getRank()
     if(score <= 0) return 1;
     return score/2000.0 + 1;
 }
-
-QPointF GameController::getPlanePos()
-{
-    return plane->pos();
-}
-
 void GameController::clearAllEnemy()
 {
     updateText(-800);   //一个清屏大招消耗800积分
     QList<QGraphicsItem *> items = scene->items(QRectF(0, 0, viewWidth, viewHeight));
     foreach (QGraphicsItem *it, items) {
-        if(it->data(GD_type) == GO_Ball || it->data(GD_type) == GO_Enemy) {
+        if(it->data(GD_type) == GO_Ball || it->data(GD_type) == GO_Enemy || it->data(GD_type) == GO_Boss) {
             removeItem(it);
             ariseCollision(it->pos());
         }
@@ -76,8 +72,7 @@ void GameController::startGame()
     scene->addItem(plane);
 
     circle = new Circle(*this);    //初始化光环
-    circle->setPos(100, 100);
-    scene->addItem(circle);
+    circle->setParentItem(plane);
     QTimer::singleShot(15000, this, SLOT(disappearCircle()));
 
     life = loadmode ? 999999 : 3;    //初始化显示分数
@@ -95,6 +90,7 @@ void GameController::startGame()
     connect(&timer, SIGNAL(timeout()), scene, SLOT(advance()));
     connect(&timerApperEnemy, SIGNAL(timeout()), this, SLOT(addEnemy()));
     connect(&timerApperLifeAdder, SIGNAL(timeout()), this, SLOT(addLifeAdder()));
+    connect(&timerAddBoss, SIGNAL(timeout()), this, SLOT(addBoss()));
 }
 
 void GameController::gameOver()
@@ -102,6 +98,7 @@ void GameController::gameOver()
     disconnect(&timer, SIGNAL(timeout()), scene, SLOT(advance()));
     disconnect(&timerApperEnemy, SIGNAL(timeout()), this, SLOT(addEnemy()));
     disconnect(&timerApperLifeAdder, SIGNAL(timeout()), this, SLOT(addLifeAdder()));
+    disconnect(&timerAddBoss, SIGNAL(timeout()), this, SLOT(addBoss()));
     QMessageBox::question(0, tr("提示"), tr("你已经挂了,得分是：%1").arg(score), QMessageBox::Yes);
     emit exitApp();
 }
@@ -125,9 +122,22 @@ void GameController::addLifeAdder()
     text->setZValue(1);
 }
 
+void GameController::addBoss()
+{
+    boss = new Boss(*this);
+    scene->addItem(boss);
+    QTimer::singleShot(12000, this, SLOT(disappearBoss()));
+}
+
+void GameController::disappearBoss()
+{
+    scene->removeItem(boss);
+}
+
 void GameController::addCircle()
 {
     updateText(-1000);
+    circle->setParentItem(plane);
     scene->addItem(circle);
     QTimer::singleShot(15000, this, SLOT(disappearCircle()));
 }
@@ -208,10 +218,10 @@ void GameController::handleKeyPressed(QKeyEvent *event)
         if(key == Qt::Key_M) addCircle();
         if(key == Qt::Key_B) clearAllEnemy();
         if(key == Qt::Key_D) plane->fire(0);
-        if(key == Qt::Key_Left) plane->setSpeedX(-8);
-        if(key == Qt::Key_Right) plane->setSpeedX(8);
-        if(key == Qt::Key_Up) plane->setSpeedY(-8);
-        if(key == Qt::Key_Down) plane->setSpeedY(8);
+        if(key == Qt::Key_Left) plane->setSpeedX(-10);
+        if(key == Qt::Key_Right) plane->setSpeedX(10);
+        if(key == Qt::Key_Up) plane->setSpeedY(-10);
+        if(key == Qt::Key_Down) plane->setSpeedY(10);
         if(key == Qt::Key_Space) plane->setFireStatus(true);
     }
 }

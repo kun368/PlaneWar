@@ -5,6 +5,7 @@
 #include "collision.h"
 #include "myplane.h"
 #include "circle.h"
+#include "boss.h"
 #include "flowback.h"
 #include <QObject>
 #include <QFont>
@@ -28,7 +29,6 @@ public:
     void removeItem(QGraphicsItem *item);
     void updateText(int dscore);
     int getRank();
-    QPointF getPlanePos();
 signals:
     void exitApp();
 public slots:
@@ -37,6 +37,8 @@ public slots:
     void gameOver();
     void addEnemy();
     void addLifeAdder();
+    void addBoss();
+    void disappearBoss();
     void addCircle();
     void disappearCircle();
     void ariseCollision(QPointF pos);
@@ -52,11 +54,12 @@ private:
     int score, life;
     bool gameIsRun;
     QList<Collision*> collis;
-    QTimer timer, timerApperEnemy, timerApperLifeAdder;
+    QTimer timer, timerApperEnemy, timerApperLifeAdder, timerAddBoss;
     FlowBack *back;
     QGraphicsScene *scene;
     MyPlane *plane;
     Circle *circle;
+    Boss *boss;
     QFont *font;
     QGraphicsTextItem *text;
 };

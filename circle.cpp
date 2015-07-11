@@ -6,11 +6,14 @@
 
 
 Circle::Circle(GameController &controller):
-    controller(controller)
+    controller(controller),
+    cur(0)
 {
     setData(GD_type, GO_Circle);
     pixMap.load(":/images/Circle.png");
-    cur = 0;
+    int w = pixMap.width() * 0.7, h = pixMap.height() * 0.7;
+    path = new QPainterPath;
+    path->addEllipse(QRectF(-w/2, -h/2, w, h));
 }
 
 QRectF Circle::boundingRect() const
@@ -21,6 +24,7 @@ QRectF Circle::boundingRect() const
 
 void Circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_UNUSED(option); Q_UNUSED(widget);
     if(!pixMap.isNull()) {
         painter->save();
         painter->scale(0.7, 0.7);
@@ -34,8 +38,7 @@ void Circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 void Circle::advance(int phace)
 {
     if(!phace) return;
-    setPos(controller.getPlanePos());
-    cur = (cur+10) % 360;
+    cur = (cur + 10) % 360;
     handleCollisions();
 }
 
@@ -49,4 +52,9 @@ void Circle::handleCollisions()
             return;
         }
     }
+}
+
+QPainterPath Circle::shape()
+{
+    return *path;
 }

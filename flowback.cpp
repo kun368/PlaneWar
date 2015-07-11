@@ -22,6 +22,7 @@ QRectF FlowBack::boundingRect() const
 
 void FlowBack::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_UNUSED(option); Q_UNUSED(widget);
     painter->save();
     int w = pixMap.width();
     painter->drawPixmap(QRectF(-10, -10, w, viewHeight+20), pixMap, QRectF(0, cur, w, viewHeight));
