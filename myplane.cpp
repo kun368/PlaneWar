@@ -85,10 +85,10 @@ void MyPlane::handleCollisions()
 void MyPlane::fire(int speed)
 {
     qreal x = pos().x(), y = pos().y();
-    int len = controller.getRank() * 10 + 1;
-    int n = controller.getRank() / 3 + 1;
-    while(n--)
-        controller.shootBullet(QPointF(x + qrand() % len - len/2, y - 15), speed);
+    int n, len = controller.getRank() * 10 + 1;
+    if(controller.getRank() >= 5) n = 2;
+    else n = 1;
+    while(n--) controller.shootBullet(QPointF(x + qrand() % len - len/2, y - 15), speed);
 }
 
 void MyPlane::setSpeedX(int x)

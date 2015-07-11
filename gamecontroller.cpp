@@ -20,7 +20,7 @@ GameController::GameController(QGraphicsScene *scene, QObject *parent) :
     timer.start(1000/33);
     timerApperEnemy.start(1500);
     timerApperLifeAdder.start(10000);
-    timerAddBoss.start(40000);
+
     scene->installEventFilter(this);
     startGame();
 }
@@ -54,7 +54,8 @@ void GameController::clearAllEnemy()
     updateText(-800);   //一个清屏大招消耗800积分
     QList<QGraphicsItem *> items = scene->items(QRectF(0, 0, viewWidth, viewHeight));
     foreach (QGraphicsItem *it, items) {
-        if(it->data(GD_type) == GO_Ball || it->data(GD_type) == GO_Enemy || it->data(GD_type) == GO_Boss) {
+        auto t = it->data(GD_type);
+        if(t == GO_Ball || t == GO_Enemy || t == GO_BossBall) {
             removeItem(it);
             ariseCollision(it->pos());
         }
@@ -87,10 +88,11 @@ void GameController::startGame()
     scene->addItem(text);
     updateText(1000);
 
-    connect(&timer, SIGNAL(timeout()), scene, SLOT(advance()));
+    QTimer::singleShot(20000, this, SLOT(addBoss())); //一定时间后出现第一个BOSS
+
+    connect(&timer, SIGNAL(timeout()), scene, SLOT(advance()));      //各种计时器
     connect(&timerApperEnemy, SIGNAL(timeout()), this, SLOT(addEnemy()));
     connect(&timerApperLifeAdder, SIGNAL(timeout()), this, SLOT(addLifeAdder()));
-    connect(&timerAddBoss, SIGNAL(timeout()), this, SLOT(addBoss()));
 }
 
 void GameController::gameOver()
@@ -98,7 +100,6 @@ void GameController::gameOver()
     disconnect(&timer, SIGNAL(timeout()), scene, SLOT(advance()));
     disconnect(&timerApperEnemy, SIGNAL(timeout()), this, SLOT(addEnemy()));
     disconnect(&timerApperLifeAdder, SIGNAL(timeout()), this, SLOT(addLifeAdder()));
-    disconnect(&timerAddBoss, SIGNAL(timeout()), this, SLOT(addBoss()));
     QMessageBox::question(0, tr("提示"), tr("你已经挂了,得分是：%1").arg(score), QMessageBox::Yes);
     emit exitApp();
 }
@@ -126,12 +127,6 @@ void GameController::addBoss()
 {
     boss = new Boss(*this);
     scene->addItem(boss);
-    QTimer::singleShot(12000, this, SLOT(disappearBoss()));
-}
-
-void GameController::disappearBoss()
-{
-    scene->removeItem(boss);
 }
 
 void GameController::addCircle()

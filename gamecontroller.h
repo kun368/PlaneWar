@@ -39,7 +39,6 @@ public slots:
     void addEnemy();
     void addLifeAdder();
     void addBoss();
-    void disappearBoss();
     void addCircle();
     void disappearCircle();
     void ariseCollision(QPointF pos);

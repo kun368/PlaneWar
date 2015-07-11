@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QGraphicsItem>
 #include <QPixmap>
+#include <QLinearGradient>
 
 class GameController;
 
@@ -15,9 +16,11 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void advance(int phace);
+    void handleCollisions();
 private:
-    int posX, dirl;
+    int posX, dirl, life;
     QPixmap pixMap;
+    QLinearGradient *gradient;
     GameController &controller;
 };
 
