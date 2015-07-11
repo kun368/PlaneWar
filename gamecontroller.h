@@ -6,6 +6,7 @@
 #include "myplane.h"
 #include "circle.h"
 #include "boss.h"
+#include "bossball.h"
 #include "flowback.h"
 #include <QObject>
 #include <QFont>
@@ -45,6 +46,7 @@ public slots:
     void disappearCollision();
     void shootBullet(QPointF pos, int speed);
     void shootBall(QPointF pos);
+    void shootBossBall(QPointF pos);
     void updateLife(int dlife);
 protected:
     bool eventFilter(QObject *obj, QEvent *event);

@@ -39,19 +39,6 @@ void Circle::advance(int phace)
 {
     if(!phace) return;
     cur = (cur + 10) % 360;
-    handleCollisions();
-}
-
-void Circle::handleCollisions()
-{
-    QList<QGraphicsItem *> collisions = collidingItems();
-    foreach (QGraphicsItem *item, collisions) {
-        if(item->data(GD_type) == GO_Ball || item->data(GD_type) == GO_Enemy) {
-            controller.removeItem(item);
-            controller.ariseCollision(item->pos());
-            return;
-        }
-    }
 }
 
 QPainterPath Circle::shape()

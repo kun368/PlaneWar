@@ -10,7 +10,6 @@ Boss::Boss(GameController &controller):
 {
     setData(GD_type, GO_Boss);
     pixMap.load(":/images/Boss.png");
-    setPos(posX, 100);
 }
 
 QRectF Boss::boundingRect() const
@@ -39,4 +38,7 @@ void Boss::advance(int phace)
     if(posX >= viewWidth || posX <= 0)
         dirl = !dirl;
     setPos(posX, 100);
+
+    int r = qrand() % 300;
+    if(r < 15) controller.shootBossBall(QPointF(posX, 140));
 }

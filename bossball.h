@@ -1,27 +1,24 @@
-#ifndef CIRCLE_H
-#define CIRCLE_H
+#ifndef BOSSBALL_H
+#define BOSSBALL_H
 
 #include "constants.h"
 #include <QObject>
 #include <QGraphicsItem>
-#include <QPainterPath>
 #include <QPixmap>
 
 class GameController;
 
-class Circle : public QGraphicsItem
+
+class BossBall : public QGraphicsItem
 {
 public:
-    Circle(GameController & controller);
+    BossBall(GameController & controller);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void advance(int phace);
-    QPainterPath shape();
 private:
-    int cur;
-    QPainterPath *path;
     QPixmap pixMap;
     GameController &controller;
 };
 
-#endif // CIRCLE_H
+#endif // BOSSBALL_H

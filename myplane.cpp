@@ -52,8 +52,17 @@ void MyPlane::advance(int phace)
 void MyPlane::handleCollisions()
 {
     QList<QGraphicsItem *> collisions = collidingItems();
+    for(QGraphicsItem *item : collisions)
+        if(item->data(GD_type) == GO_Circle)
+            return;
     foreach (QGraphicsItem *item, collisions) {
         if(item->data(GD_type) == GO_Ball) {
+            controller.removeItem(item);
+            controller.updateLife(-1);
+            controller.ariseCollision(pos());
+            return;
+        }
+        if(item->data(GD_type) == GO_BossBall) {
             controller.removeItem(item);
             controller.updateLife(-1);
             controller.ariseCollision(pos());

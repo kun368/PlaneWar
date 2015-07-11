@@ -11,6 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = PlaneWar
 TEMPLATE = app
 
+CONFIG += c++11
+
 
 SOURCES += main.cpp \
     myview.cpp \
@@ -26,7 +28,8 @@ SOURCES += main.cpp \
     lifeadder.cpp \
     circle.cpp \
     helpdlg.cpp \
-    boss.cpp
+    boss.cpp \
+    bossball.cpp
 
 HEADERS  += \
     myview.h \
@@ -42,7 +45,8 @@ HEADERS  += \
     lifeadder.h \
     circle.h \
     helpdlg.h \
-    boss.h
+    boss.h \
+    bossball.h
 
 FORMS    += \
     logindlg.ui \

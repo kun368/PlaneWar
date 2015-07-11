@@ -75,7 +75,7 @@ void GameController::startGame()
     circle->setParentItem(plane);
     QTimer::singleShot(15000, this, SLOT(disappearCircle()));
 
-    life = loadmode ? 999999 : 3;    //初始化显示分数
+    life = loadmode ? 999999 : 5;    //初始化显示分数
     score = 0;
     text = new QGraphicsTextItem();
     font = new QFont();
@@ -186,6 +186,14 @@ void GameController::shootBullet(QPointF pos, int speed)
 void GameController::shootBall(QPointF pos)
 {
     Ball *tempBall = new Ball(*this);
+    tempBall->setPos(pos);
+    scene->addItem(tempBall);
+    text->setZValue(1);
+}
+
+void GameController::shootBossBall(QPointF pos)
+{
+    BossBall *tempBall = new BossBall(*this);
     tempBall->setPos(pos);
     scene->addItem(tempBall);
     text->setZValue(1);
