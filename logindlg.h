@@ -4,6 +4,9 @@
 #include "constants.h"
 #include <QDialog>
 #include <QComboBox>
+#include <QMouseEvent>
+#include <QPaintEvent>
+#include <QBitmap>
 
 namespace Ui {
 class LogInDlg;
@@ -16,7 +19,10 @@ class LogInDlg : public QDialog
 public:
     explicit LogInDlg(QWidget *parent = 0);
     ~LogInDlg();
-
+protected:
+    void mouseMoveEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+    void paintEvent(QPaintEvent *event);
 private slots:
     void on_pushButton_start_clicked();
     void on_pushButton_loadStart_clicked();
@@ -25,6 +31,7 @@ private slots:
 private:
     void saveBackGroundType();
     void saveBackGroundLoop();
+    QPoint dragPosition;
     Ui::LogInDlg *ui;
 };
 

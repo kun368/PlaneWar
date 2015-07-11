@@ -49,6 +49,7 @@ int GameController::getRank()
     if(score <= 0) return 1;
     return score/2000.0 + 1;
 }
+
 void GameController::clearAllEnemy()
 {
     updateText(-800);   //一个清屏大招消耗800积分
