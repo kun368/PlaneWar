@@ -20,12 +20,6 @@ LogInDlg::LogInDlg(QWidget *parent) :
     pix.load(":/images/LogInBackground.png", 0, Qt::AvoidDither|Qt::ThresholdAlphaDither|Qt::ThresholdDither);
     resize(pix.size());
     this->setMask(pix.mask());
-
-//    setFixedSize(width(), height());
-//    QPalette plt = this->palette();
-//    plt.setBrush(QPalette::Window, QBrush(QPixmap(":/images/LogInBackground.jpg")));
-//    this->setPalette(plt);
-//    this->setAutoFillBackground(true);
 }
 
 LogInDlg::~LogInDlg()

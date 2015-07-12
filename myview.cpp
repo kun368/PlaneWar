@@ -1,17 +1,28 @@
 #include "myview.h"
 #include "myplane.h"
 #include "flowback.h"
+#include <QDir>
 #include <QDebug>
 #include <QWidget>
 #include <QPixmap>
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
+#include <QMediaPlayerControl>
 
 
 MyView::MyView(QWidget *parent):
     QGraphicsView(parent)
 {
-    sound = new QSound(":/musics/TheDawn.wav");
-    sound->setLoops(1000);
-    sound->play();
+    QMediaPlayer * player = new QMediaPlayer(this);     //背景音乐
+    QMediaPlaylist * list = new QMediaPlaylist(this);
+    list->addMedia(QUrl(QDir::currentPath() + "/a.mp3"));
+    list->setCurrentIndex(0);
+    list->setPlaybackMode(QMediaPlaylist::CurrentItemInLoop);
+    player->setPlaylist(list);
+    // player->setMedia(QUrl(QDir::currentPath() + "/a.mp3"));
+    player->play();
+
+    qDebug() << QDir::currentPath();
 
     icon = new QIcon(":/images/Icon.png");
 

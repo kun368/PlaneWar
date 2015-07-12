@@ -21,6 +21,5 @@
     <qresource prefix="/musics">
         <file>Collision.wav</file>
         <file>Shoot.wav</file>
-        <file>TheDawn.wav</file>
     </qresource>
 </RCC>
