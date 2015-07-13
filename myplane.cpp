@@ -43,7 +43,7 @@ void MyPlane::advance(int phace)
     if(pos().y() > viewHeight) setPos(pos().x(), viewHeight);
 
     if(isFireing) {
-        if(isFireing % 5  == 1) fire(8);
+        if(isFireing % 7  == 1) fire(10);
         isFireing++;
     }
     handleCollisions();

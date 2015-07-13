@@ -1,10 +1,14 @@
 #include "enemy.h"
 #include "gamecontroller.h"
 #include <QPainter>
+#include <cmath>
+#include <QDebug>
 #include <QGraphicsColorizeEffect>
 
 Enemy::Enemy(GameController &controller):
-    controller(controller)
+    controller(controller),
+    speedY(4),
+    speedX(qrand() % 7 - 3)
 {
     setData(GD_type, GO_Enemy);
     pixMap.load(":/images/Enemy.png");
@@ -12,6 +16,8 @@ Enemy::Enemy(GameController &controller):
     QGraphicsColorizeEffect * effect = new QGraphicsColorizeEffect;
     effect->setColor(QColor(qrand()%256, qrand()%256, qrand()%256));
     setGraphicsEffect(effect);
+
+    rad = -(atan(speedX*1.0/speedY) / 3.1415926) * 180.0;
 }
 
 QRectF Enemy::boundingRect() const
@@ -25,6 +31,8 @@ void Enemy::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     Q_UNUSED(option); Q_UNUSED(widget);
     if(!pixMap.isNull()) {
         painter->save();
+        // qDebug() << speedX << " " << speedY << " " << rad;
+        painter->rotate(rad);
         int w = pixMap.width(), h = pixMap.height();
         painter->drawPixmap(QPoint(-w/2, -h/2), pixMap);
         painter->restore();
@@ -36,12 +44,12 @@ void Enemy::advance(int phace)
     if(!phace) return;
 
     QPointF cur = pos();
-    setPos(cur.x(), cur.y() + 4);
+    moveBy(speedX, speedY);
+    if(!isInView(pos())) controller.removeItem(this);
 
-    int r = qrand() % 300;
-    if(r < controller.getRank()) controller.shootBall(pos());
-
-    if(pos().y() > viewHeight) controller.removeItem(this);
+    int r = qrand() % 600;
+    if(r < controller.getRank())
+        controller.shootBall(pos());
 
     handleCollisions();
 }

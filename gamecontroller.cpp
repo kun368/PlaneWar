@@ -44,6 +44,11 @@ void GameController::updateText(int dscore)
     text->setPlainText(tr("得分:%1  等级:%2  生命:%3").arg(score).arg(getRank()).arg(life));
 }
 
+QPointF GameController::getPlantPos()
+{
+    return plane->pos();
+}
+
 int GameController::getRank()
 {
     if(score <= 0) return 1;
@@ -107,7 +112,7 @@ void GameController::gameOver()
 
 void GameController::addEnemy()
 {
-    int x = qrand() % viewWidth, y = 1;
+    int x = qrand() % 300 - 150 + viewWidth/2, y = 1;
     Enemy *tempEnemy = new Enemy(*this);
     tempEnemy->setPos(x, y);
     scene->addItem(tempEnemy);
@@ -183,6 +188,7 @@ void GameController::shootBall(QPointF pos)
 {
     Ball *tempBall = new Ball(*this);
     tempBall->setPos(pos);
+    tempBall->setDir();
     scene->addItem(tempBall);
     text->setZValue(1);
 }

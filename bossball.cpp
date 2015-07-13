@@ -33,5 +33,5 @@ void BossBall::advance(int phace)
 
     QPointF cur = pos();
     setPos(cur.x(), cur.y() + 7);
-    if(cur.y() > viewHeight) controller.removeItem(this);
+    if(!isInView(pos())) controller.removeItem(this);
 }

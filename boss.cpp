@@ -15,8 +15,8 @@ Boss::Boss(GameController &controller):
     pixMap.load(":/images/Boss.png");
     gradient = new QLinearGradient(QPoint(-50, -50), QPoint(50, 50));
     gradient->setColorAt(0, Qt::red);
-    gradient->setColorAt(0.3, Qt::yellow);
-    gradient->setColorAt(0.6, Qt::blue);
+    gradient->setColorAt(0.2, Qt::yellow);
+    gradient->setColorAt(0.7, Qt::blue);
     gradient->setColorAt(1, Qt::green);
 }
 
@@ -47,10 +47,10 @@ void Boss::advance(int phace)
     else posX += 5;
     if(posX >= viewWidth || posX <= 0)
         dirl = !dirl;
-    setPos(posX, 100);
+    setPos(posX, 150);
 
     int r = qrand() % 300;
-    if(r < 15) controller.shootBossBall(QPointF(posX, 140));
+    if(r < 10) controller.shootBossBall(QPointF(posX, 210));
     handleCollisions();
 }
 

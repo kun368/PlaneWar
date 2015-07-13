@@ -32,7 +32,6 @@ void LifeAdder::advance(int phace)
     if(!phace) return;
 
     QPointF cur = pos();
-    setPos(cur.x(), cur.y() + 12);
-
-    if(cur.y() > viewHeight) controller.removeItem(this);
+    moveBy(0, 12);
+    if(!isInView(pos())) controller.removeItem(this);
 }

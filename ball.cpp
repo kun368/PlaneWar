@@ -1,6 +1,7 @@
 #include "ball.h"
 #include "gamecontroller.h"
 #include <QPainter>
+#include <cmath>
 
 Ball::Ball(GameController &controller):
     controller(controller)
@@ -30,10 +31,13 @@ void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 void Ball::advance(int phace)
 {
     if(!phace) return;
+    moveBy(vector.x() * 10, vector.y() * 10);
+    if(!isInView(pos())) controller.removeItem(this);
+}
 
-    QPointF cur = pos();
-    setPos(cur.x() + dirx, cur.y() + 7);
-
-    if(cur.y() > viewHeight) controller.removeItem(this);
+void Ball::setDir()
+{
+    vector = controller.getPlantPos() - pos();
+    vector /= hypot(vector.x(), vector.y());
 }
 

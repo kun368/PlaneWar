@@ -30,11 +30,9 @@ void Bullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 void Bullet::advance(int phace)
 {
     if(!phace) return;
-
     QPointF cur = pos();
-    setPos(cur.x(), cur.y() - speed);
-
-    if(pos().y() < 0) controller.removeItem(this);
+    moveBy(0, -speed);
+    if(!isInView(pos())) controller.removeItem(this);
 }
 
 void Bullet::setSpeed(int x)

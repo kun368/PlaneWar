@@ -2,6 +2,7 @@
 #define CONSTANTS_H
 
 #include <QString>
+#include <QPointF>
 
 extern bool loadmode;
 extern QString backgroundName;
@@ -9,6 +10,8 @@ extern int difficulty;
 extern bool backgroundLoop;
 extern const int viewHeight;
 extern const int viewWidth;
+
+bool isInView(const QPointF & rhs);
 
 enum GameObjectsData {
     GD_type

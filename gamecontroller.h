@@ -29,6 +29,7 @@ public:
     ~GameController();
     void removeItem(QGraphicsItem *item);
     void updateText(int dscore);
+    QPointF getPlantPos();
     int getRank();
 signals:
     void exitApp();
