@@ -5,6 +5,7 @@
 
 extern bool loadmode;
 extern QString backgroundName;
+extern int difficulty;
 extern bool backgroundLoop;
 extern const int viewHeight;
 extern const int viewWidth;

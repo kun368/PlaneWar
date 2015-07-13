@@ -19,10 +19,8 @@ MyView::MyView(QWidget *parent):
     list->setCurrentIndex(0);
     list->setPlaybackMode(QMediaPlaylist::CurrentItemInLoop);
     player->setPlaylist(list);
-    // player->setMedia(QUrl(QDir::currentPath() + "/a.mp3"));
+    player->setVolume(75);
     player->play();
-
-    qDebug() << QDir::currentPath();
 
     icon = new QIcon(":/images/Icon.png");
 

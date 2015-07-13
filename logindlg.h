@@ -7,6 +7,7 @@
 #include <QMouseEvent>
 #include <QPaintEvent>
 #include <QBitmap>
+#include <QPixmap>
 
 namespace Ui {
 class LogInDlg;
@@ -25,13 +26,15 @@ protected:
     void paintEvent(QPaintEvent *event);
 private slots:
     void on_pushButton_start_clicked();
-    void on_pushButton_loadStart_clicked();
     void on_pushButton_help_clicked();
     void on_pushButton_About_clicked();
 private:
     void saveBackGroundType();
     void saveBackGroundLoop();
+    void saveLoadMode();
+    void saveDifficulty();
     QPoint dragPosition;
+    QPixmap *pix;
     Ui::LogInDlg *ui;
 };
 

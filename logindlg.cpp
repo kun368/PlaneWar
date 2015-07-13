@@ -15,11 +15,17 @@ LogInDlg::LogInDlg(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->pushButton_exit, SIGNAL(clicked(bool)), this, SLOT(close()));
+    // 设置背景图片
     this->setWindowFlags(Qt::FramelessWindowHint);
-    QPixmap pix;
-    pix.load(":/images/LogInBackground.png", 0, Qt::AvoidDither|Qt::ThresholdAlphaDither|Qt::ThresholdDither);
-    resize(pix.size());
-    this->setMask(pix.mask());
+    pix = new QPixmap;
+    pix->load(":/images/LogInBackground.png", 0, Qt::AvoidDither|Qt::ThresholdAlphaDither|Qt::ThresholdDither);
+    resize(pix->size());
+    this->setMask(pix->mask());
+    // 设置按钮透明
+    ui->pushButton_exit->setFlat(true);
+    ui->pushButton_About->setFlat(true);
+    ui->pushButton_help->setFlat(true);
+    ui->pushButton_start->setFlat(true);
 }
 
 LogInDlg::~LogInDlg()
@@ -48,7 +54,8 @@ void LogInDlg::mousePressEvent(QMouseEvent *event)
 void LogInDlg::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
-    painter.drawPixmap(0, 0, QPixmap(":/images/LogInBackground.jpg"));//重绘图片
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.drawPixmap(0, 0, *pix);//重绘图片
 }
 
 void LogInDlg::on_pushButton_start_clicked()
@@ -56,14 +63,8 @@ void LogInDlg::on_pushButton_start_clicked()
     loadmode = false;
     saveBackGroundType();
     saveBackGroundLoop();
-    accept();
-}
-
-void LogInDlg::on_pushButton_loadStart_clicked()
-{
-    loadmode = true;
-    saveBackGroundType();
-    saveBackGroundLoop();
+    saveLoadMode();
+    saveDifficulty();
     accept();
 }
 
@@ -93,4 +94,19 @@ void LogInDlg::saveBackGroundLoop()
      QString str = ui->comboBox_2->currentText();
      if(str == "开启") backgroundLoop = true;
      else backgroundLoop = false;
+}
+
+void LogInDlg::saveLoadMode()
+{
+    QString str = ui->comboBox_3->currentText();
+    if(str == "开启") loadmode = true;
+    else loadmode = false;
+}
+
+void LogInDlg::saveDifficulty()
+{
+    QString str = ui->comboBox_4->currentText();
+    if(str == "简单") difficulty = 1;
+    else if(str == "中等") difficulty = 2;
+    else difficulty = 3;
 }
