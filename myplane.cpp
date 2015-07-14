@@ -26,7 +26,8 @@ void MyPlane::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     Q_UNUSED(option); Q_UNUSED(widget);
     if(!pixMap.isNull()) {
         painter->save();
-        painter->scale(0.6, 0.6);
+        qreal sc = qMin((1.0+controller.getRank()/10.0), 2.0);
+        painter->scale(0.6 * sc, 0.6 * sc);
         int w = pixMap.width(), h = pixMap.height();
         painter->drawPixmap(QPoint(-w/2, -h/2), pixMap);
         painter->restore();
@@ -53,9 +54,6 @@ void MyPlane::advance(int phace)
 void MyPlane::handleCollisions()
 {
     QList<QGraphicsItem *> collisions = collidingItems();
-    for(QGraphicsItem *item : collisions)
-        if(item->data(GD_type) == GO_Circle)
-            return;
     foreach (QGraphicsItem *item, collisions) {
         if(item->data(GD_type) == GO_Ball) {
             controller.removeItem(item);
@@ -86,10 +84,7 @@ void MyPlane::handleCollisions()
 void MyPlane::fire(int speed)
 {
     qreal x = pos().x(), y = pos().y();
-    int n, len = controller.getRank() * 10 + 1;
-    if(controller.getRank() >= 5) n = 2;
-    else n = 1;
-    while(n--) controller.shootBullet(QPointF(x + qrand() % len - len/2, y - 15), speed);
+    controller.shootBullet(QPointF(x, y - 20), speed);
 }
 
 void MyPlane::setSpeedX(int x)

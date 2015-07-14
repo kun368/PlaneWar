@@ -21,6 +21,7 @@ void WingPlane::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     Q_UNUSED(option); Q_UNUSED(widget);
     if(!pixMap.isNull()) {
         painter->save();
+        painter->scale(0.8, 0.8);
         int w = pixMap.width(), h = pixMap.height();
         painter->drawPixmap(QPoint(-w/2, -h/2), pixMap);
         painter->restore();
@@ -30,7 +31,7 @@ void WingPlane::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 void WingPlane::advance(int phace)
 {
     if(!phace) return;
-    if(++cnt == 20) {
+    if(++cnt == 15) {
         controller.shootWingBullet(controller.getPlantPos() + pos() + QPointF(0, -20));
         cnt = 0;
     }

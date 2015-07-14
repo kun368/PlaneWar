@@ -16,9 +16,9 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void advance(int phace);
 private:
-    int cnt;
     QPixmap pixMap;
     GameController &controller;
+    int cnt;
 };
 
 #endif // WINGPLANE_H

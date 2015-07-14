@@ -18,8 +18,8 @@ public:
     void advance(int phace);
     void handleCollisions();
 private:
-    qreal speedY, speedX, rad;
     GameController &controller;
+    qreal speedY, speedX, rad;
     QPixmap pixMap;
 };
 

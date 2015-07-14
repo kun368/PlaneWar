@@ -17,11 +17,12 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void advance(int phace);
     QPainterPath shape();
+    void handleCollisions();
 private:
-    int cur;
     QPainterPath *path;
     QPixmap pixMap;
     GameController &controller;
+    int cur;
 };
 
 #endif // CIRCLE_H

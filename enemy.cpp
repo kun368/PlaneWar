@@ -43,9 +43,9 @@ void Enemy::advance(int phace)
 {
     if(!phace) return;
 
-    QPointF cur = pos();
     moveBy(speedX, speedY);
-    if(!isInView(pos())) controller.removeItem(this);
+    if(!isInView(pos()))
+        controller.removeItem(this);
 
     int r = qrand() % 600;
     if(r < controller.getRank())
@@ -59,7 +59,14 @@ void Enemy::handleCollisions()
     QList<QGraphicsItem *> collisions = collidingItems();
     foreach (QGraphicsItem *item, collisions) {
         if(item->data(GD_type) == GO_Bullet) {
-            controller.updateText(100 + qrand() % 50);
+            controller.updateText(100 + qrand() % 20);
+            controller.removeItem(this);
+            controller.ariseCollision(pos());
+            controller.removeItem(item);
+            return;
+        }
+        if(item->data(GD_type) == GO_WingBullet) {
+            controller.updateText(50 + qrand() % 20);
             controller.removeItem(this);
             controller.ariseCollision(pos());
             controller.removeItem(item);

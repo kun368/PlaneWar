@@ -18,8 +18,8 @@ GameController::GameController(QGraphicsScene *scene, QObject *parent) :
     scene(scene)
 {
     timer.start(1000/33);
-    timerApperEnemy.start(1500);
-    timerApperLifeAdder.start(10000);
+    timerApperEnemy.start(3000/difficulty);
+    timerApperLifeAdder.start(7000*difficulty);
 
     scene->installEventFilter(this);
     startGame();
@@ -57,13 +57,17 @@ int GameController::getRank()
 
 void GameController::clearAllEnemy()
 {
-    updateText(-800);   //一个清屏大招消耗800积分
+    updateText(-200);   //清屏大招消耗积分
     QList<QGraphicsItem *> items = scene->items(QRectF(0, 0, viewWidth, viewHeight));
     foreach (QGraphicsItem *it, items) {
         auto t = it->data(GD_type);
         if(t == GO_Ball || t == GO_Enemy || t == GO_BossBall) {
             removeItem(it);
             ariseCollision(it->pos());
+        }
+        if(t == GO_Boss) {
+            Boss * iter = dynamic_cast<Boss *>(it);
+            iter->changeLife(-5);
         }
     }
 }
@@ -84,7 +88,7 @@ void GameController::startGame()
 
     addWingPlane();    // 初始化僚机
 
-    life = loadmode ? 999999 : 5;    //初始化显示分数
+    life = loadmode ? 999999 : (15/difficulty);    //初始化显示分数
     score = 0;
     text = new QGraphicsTextItem();
     font = new QFont();
@@ -139,7 +143,7 @@ void GameController::addBoss()
 
 void GameController::addCircle()
 {
-    updateText(-1000);
+    updateText(-200);
     circle->setParentItem(plane);
     scene->addItem(circle);
     QTimer::singleShot(15000, this, SLOT(disappearCircle()));
@@ -147,6 +151,7 @@ void GameController::addCircle()
 
 void GameController::addWingPlane()
 {
+    // updateText(-300);
     wing1 = new WingPlane(*this); wing2 = new WingPlane(*this);
     wing1->setParentItem(plane); wing2->setParentItem(plane);
     wing1->setPos(-70, 70); wing2->setPos(70, 70);
@@ -197,7 +202,7 @@ void GameController::shootBullet(QPointF pos, int speed)
     sound->setLoops(1);
     sound->play();
 
-    updateText(-30);
+    updateText(-10);
 }
 
 void GameController::shootBall(QPointF pos)

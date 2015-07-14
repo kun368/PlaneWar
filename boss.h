@@ -17,11 +17,12 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void advance(int phace);
     void handleCollisions();
+    void changeLife(const int d);
 private:
-    int posX, dirl, life;
     QPixmap pixMap;
     QLinearGradient *gradient;
     GameController &controller;
+    int posX, dirl, life, cnt, fullLife;
 };
 
 #endif // BOSS_H

@@ -27,7 +27,8 @@ void Circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     Q_UNUSED(option); Q_UNUSED(widget);
     if(!pixMap.isNull()) {
         painter->save();
-        painter->scale(0.7, 0.7);
+        qreal sc = qMin((1.0+controller.getRank()/10.0), 2.0);
+        painter->scale(0.7 * sc, 0.7 * sc);
         int w = pixMap.width(), h = pixMap.height();
         painter->rotate(cur);
         painter->drawPixmap(QPoint(-w/2, -h/2), pixMap);
@@ -38,10 +39,24 @@ void Circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 void Circle::advance(int phace)
 {
     if(!phace) return;
-    cur = (cur + 10) % 360;
+    cur = (cur + 15) % 360;
+    handleCollisions();
 }
 
 QPainterPath Circle::shape()
 {
     return *path;
+}
+
+void Circle::handleCollisions()
+{
+    QList<QGraphicsItem *> collisions = collidingItems();
+    foreach (QGraphicsItem *item, collisions) {
+        auto t = item->data(GD_type);
+        if(t == GO_Ball || t == GO_Enemy) {
+            controller.removeItem(item);
+            controller.ariseCollision(item->pos());
+            return;
+        }
+    }
 }

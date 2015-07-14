@@ -30,8 +30,6 @@ void LifeAdder::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 void LifeAdder::advance(int phace)
 {
     if(!phace) return;
-
-    QPointF cur = pos();
     moveBy(0, 12);
     if(!isInView(pos())) controller.removeItem(this);
 }

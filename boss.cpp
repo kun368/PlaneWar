@@ -9,7 +9,8 @@ Boss::Boss(GameController &controller):
     controller(controller),
     posX(qrand() % viewWidth),
     dirl(true),
-    life(100)
+    fullLife(30 * difficulty),
+    life(30 * difficulty)
 {
     setData(GD_type, GO_Boss);
     pixMap.load(":/images/Boss.png");
@@ -34,7 +35,7 @@ void Boss::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
         int w = pixMap.width(), h = pixMap.height();
         painter->drawPixmap(QPoint(-w/2, -h/2), pixMap);
         painter->setBrush(*gradient);
-        painter->drawRect(-w/2, -h/2 - 10, w * life / 100, 8);
+        painter->drawRect(-w/2, -h/2 - 10, w * life / fullLife, 8);
         painter->restore();
     }
 }
@@ -50,7 +51,10 @@ void Boss::advance(int phace)
     setPos(posX, 150);
 
     int r = qrand() % 300;
-    if(r < 10) controller.shootBossBall(QPointF(posX, 210));
+    if(++cnt == (300/difficulty)){
+        controller.shootBossBall(QPointF(posX, 210));
+        cnt = 0;
+    }
     handleCollisions();
 }
 
@@ -58,16 +62,21 @@ void Boss::handleCollisions()
 {
     QList<QGraphicsItem *> collisions = collidingItems();
     foreach (QGraphicsItem *item, collisions) {
-        if(item->data(GD_type) == GO_Bullet) {
+        auto t = item->data(GD_type);
+        if(t == GO_Bullet || t == GO_WingBullet) {
             controller.ariseCollision(pos());
             controller.removeItem(item);
-            if(--life == 0) {
-                controller.updateText(300 + qrand() % 50);
+            if(--life <= 0) {
+                controller.updateText(2000 + qrand() % 100);
                 controller.removeItem(this);
                 QTimer::singleShot(70000, &controller, SLOT(addBoss()));
             }
-            qDebug() << life;
             return;
         }
     }
+}
+
+void Boss::changeLife(const int d)
+{
+    life += d;
 }
