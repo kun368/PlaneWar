@@ -27,7 +27,9 @@ enum GameObjectTypes {
     GO_LifeAdder,
     GO_Circle,
     GO_Boss,
-    GO_BossBall
+    GO_BossBall,
+    GO_WingPlane,
+    GO_WingBullet
 };
 
 #endif // CONSTANTS_H

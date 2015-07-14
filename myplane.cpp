@@ -11,7 +11,7 @@ MyPlane::MyPlane(GameController &controller):
     controller(controller)
 {
     setData(GD_type, GO_MyPlane);
-    pixMap.load(":/images/MyPlane.png");
+    pixMap.load(":/images/MyPlane2.png");
     speedX = speedY = isFireing = 0;
 }
 
@@ -26,6 +26,7 @@ void MyPlane::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     Q_UNUSED(option); Q_UNUSED(widget);
     if(!pixMap.isNull()) {
         painter->save();
+        painter->scale(0.6, 0.6);
         int w = pixMap.width(), h = pixMap.height();
         painter->drawPixmap(QPoint(-w/2, -h/2), pixMap);
         painter->restore();

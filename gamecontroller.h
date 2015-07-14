@@ -7,6 +7,8 @@
 #include "circle.h"
 #include "boss.h"
 #include "bossball.h"
+#include "wingplane.h"
+#include "wingbullet.h"
 #include "flowback.h"
 #include <QObject>
 #include <QFont>
@@ -41,12 +43,15 @@ public slots:
     void addLifeAdder();
     void addBoss();
     void addCircle();
+    void addWingPlane();
     void disappearCircle();
+    void disappearWingPlane();
     void ariseCollision(QPointF pos);
     void disappearCollision();
     void shootBullet(QPointF pos, int speed);
     void shootBall(QPointF pos);
     void shootBossBall(QPointF pos);
+    void shootWingBullet(QPointF pos);
     void updateLife(int dlife);
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
@@ -62,6 +67,7 @@ private:
     MyPlane *plane;
     Circle *circle;
     Boss *boss;
+    WingPlane *wing1, *wing2;
     QFont *font;
     QGraphicsTextItem *text;
 };

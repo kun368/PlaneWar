@@ -16,6 +16,8 @@
         <file>Boss.png</file>
         <file>BossBall.png</file>
         <file>LogInBackground.png</file>
+        <file>MyPlane2.png</file>
+        <file>WingBullet.png</file>
     </qresource>
     <qresource prefix="/musics">
         <file>Collision.wav</file>

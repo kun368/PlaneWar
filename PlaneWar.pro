@@ -29,7 +29,9 @@ SOURCES += main.cpp \
     circle.cpp \
     helpdlg.cpp \
     boss.cpp \
-    bossball.cpp
+    bossball.cpp \
+    wingplane.cpp \
+    wingbullet.cpp
 
 HEADERS  += \
     myview.h \
@@ -46,7 +48,9 @@ HEADERS  += \
     circle.h \
     helpdlg.h \
     boss.h \
-    bossball.h
+    bossball.h \
+    wingplane.h \
+    wingbullet.h
 
 FORMS    += \
     logindlg.ui \

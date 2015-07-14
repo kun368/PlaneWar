@@ -82,6 +82,8 @@ void GameController::startGame()
     circle->setParentItem(plane);
     QTimer::singleShot(15000, this, SLOT(disappearCircle()));
 
+    addWingPlane();    // 初始化僚机
+
     life = loadmode ? 999999 : 5;    //初始化显示分数
     score = 0;
     text = new QGraphicsTextItem();
@@ -143,9 +145,23 @@ void GameController::addCircle()
     QTimer::singleShot(15000, this, SLOT(disappearCircle()));
 }
 
+void GameController::addWingPlane()
+{
+    wing1 = new WingPlane(*this); wing2 = new WingPlane(*this);
+    wing1->setParentItem(plane); wing2->setParentItem(plane);
+    wing1->setPos(-70, 70); wing2->setPos(70, 70);
+    QTimer::singleShot(15000, this, SLOT(disappearWingPlane()));
+}
+
 void GameController::disappearCircle()
 {
     scene->removeItem(circle);
+}
+
+void GameController::disappearWingPlane()
+{
+    scene->removeItem(wing1);
+    scene->removeItem(wing2);
 }
 
 void GameController::ariseCollision(QPointF pos)
@@ -201,6 +217,14 @@ void GameController::shootBossBall(QPointF pos)
     text->setZValue(1);
 }
 
+void GameController::shootWingBullet(QPointF pos)
+{
+    WingBullet *temp = new WingBullet(*this);
+    temp->setPos(pos);
+    scene->addItem(temp);
+    text->setZValue(1);
+}
+
 void GameController::updateLife(int dlife)
 {
     life += dlife;
@@ -225,6 +249,7 @@ void GameController::handleKeyPressed(QKeyEvent *event)
 {
     if(!event->isAutoRepeat()) {
         int key = event->key();
+        if(key == Qt::Key_A) addWingPlane();
         if(key == Qt::Key_M) addCircle();
         if(key == Qt::Key_B) clearAllEnemy();
         if(key == Qt::Key_D) plane->fire(0);

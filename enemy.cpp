@@ -7,7 +7,7 @@
 
 Enemy::Enemy(GameController &controller):
     controller(controller),
-    speedY(4),
+    speedY(7),
     speedX(qrand() % 7 - 3)
 {
     setData(GD_type, GO_Enemy);
