@@ -3,7 +3,7 @@
 #include <QPainter>
 #include <cmath>
 #include <QDebug>
-#include <QGraphicsColorizeEffect>
+#include <QString>
 
 Enemy::Enemy(GameController &controller):
     controller(controller),
@@ -11,12 +11,8 @@ Enemy::Enemy(GameController &controller):
     speedX(qrand() % 7 - 3)
 {
     setData(GD_type, GO_Enemy);
-    pixMap.load(":/images/Enemy.png");
-
-    QGraphicsColorizeEffect * effect = new QGraphicsColorizeEffect;
-    effect->setColor(QColor(qrand()%256, qrand()%256, qrand()%256));
-    setGraphicsEffect(effect);
-
+    QString str = QString(":/images/Enemy%1.png").arg(qrand()%5+1);
+    pixMap.load(str);  //五种敌机图
     rad = -(atan(speedX*1.0/speedY) / 3.1415926) * 180.0;
 }
 
