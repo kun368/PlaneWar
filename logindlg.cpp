@@ -2,8 +2,10 @@
 #include "ui_logindlg.h"
 #include "helpdlg.h"
 #include "qpainter.h"
+#include "rank.h"
 #include <QIcon>
 #include <QTextEdit>
+#include <QDateTime>
 #include <QPalette>
 #include <QString>
 #include <QDebug>
@@ -26,6 +28,10 @@ LogInDlg::LogInDlg(QWidget *parent) :
     ui->pushButton_About->setFlat(true);
     ui->pushButton_help->setFlat(true);
     ui->pushButton_start->setFlat(true);
+    ui->pushButton_ShowRank->setFlat(true);
+    //初始化玩家信息
+    qsrand(QDateTime::currentDateTime().utcOffset());
+    ui->lineEdit->setText(QString("玩家%1").arg(qrand()));
 }
 
 LogInDlg::~LogInDlg()
@@ -65,6 +71,7 @@ void LogInDlg::on_pushButton_start_clicked()
     saveBackGroundLoop();
     saveLoadMode();
     saveDifficulty();
+    savePlayerName();
     accept();
 }
 
@@ -109,4 +116,15 @@ void LogInDlg::saveDifficulty()
     if(str == "简单") difficulty = 1;
     else if(str == "中等") difficulty = 2;
     else difficulty = 3;
+}
+
+void LogInDlg::savePlayerName()
+{
+    playerName = ui->lineEdit->text();
+}
+
+void LogInDlg::on_pushButton_ShowRank_clicked()
+{
+    Rank rank;
+    rank.show();
 }

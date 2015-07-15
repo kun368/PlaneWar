@@ -7,6 +7,7 @@
 #include "flowback.h"
 #include "lifeadder.h"
 #include "circle.h"
+#include "rank.h"
 #include <QDebug>
 #include <QFont>
 #include <QTimer>
@@ -113,6 +114,13 @@ void GameController::gameOver()
     disconnect(&timerApperEnemy, SIGNAL(timeout()), this, SLOT(addEnemy()));
     disconnect(&timerApperLifeAdder, SIGNAL(timeout()), this, SLOT(addLifeAdder()));
     QMessageBox::question(0, tr("提示"), tr("你已经挂了,得分是：%1").arg(score), QMessageBox::Yes);
+    // 如果不是上帝模式，显示排行榜
+    if(!loadmode) {
+        Rank rank;
+        Record cur; cur.name = playerName; cur.score = score; cur.time = QDateTime::currentDateTime();
+        rank.add(cur);
+        rank.show();
+    }
     emit exitApp();
 }
 

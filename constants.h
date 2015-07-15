@@ -10,6 +10,7 @@ extern int difficulty;
 extern bool backgroundLoop;
 extern const int viewHeight;
 extern const int viewWidth;
+extern QString playerName;
 
 bool isInView(const QPointF & rhs);
 

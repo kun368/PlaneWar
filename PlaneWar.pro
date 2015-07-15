@@ -31,7 +31,8 @@ SOURCES += main.cpp \
     boss.cpp \
     bossball.cpp \
     wingplane.cpp \
-    wingbullet.cpp
+    wingbullet.cpp \
+    rank.cpp
 
 HEADERS  += \
     myview.h \
@@ -50,7 +51,8 @@ HEADERS  += \
     boss.h \
     bossball.h \
     wingplane.h \
-    wingbullet.h
+    wingbullet.h \
+    rank.h
 
 FORMS    += \
     logindlg.ui \

@@ -6,6 +6,7 @@ bool backgroundLoop;
 int difficulty;
 const int viewHeight = 600;
 const int viewWidth = 500;
+QString playerName;
 
 
 bool isInView(const QPointF & rhs){

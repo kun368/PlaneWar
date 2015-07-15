@@ -28,11 +28,14 @@ private slots:
     void on_pushButton_start_clicked();
     void on_pushButton_help_clicked();
     void on_pushButton_About_clicked();
+    void on_pushButton_ShowRank_clicked();
+
 private:
     void saveBackGroundType();
     void saveBackGroundLoop();
     void saveLoadMode();
     void saveDifficulty();
+    void savePlayerName();
     QPoint dragPosition;
     QPixmap *pix;
     Ui::LogInDlg *ui;
