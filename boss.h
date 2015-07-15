@@ -22,7 +22,7 @@ private:
     QPixmap pixMap;
     QLinearGradient *gradient;
     GameController &controller;
-    int posX, dirl, life, cnt, fullLife;
+    int life, cnt, fullLife, rad;
 };
 
 #endif // BOSS_H

@@ -214,10 +214,11 @@ void GameController::shootBall(QPointF pos)
     text->setZValue(1);
 }
 
-void GameController::shootBossBall(QPointF pos)
+void GameController::shootBossBall(QPointF pos, qreal angle)
 {
     BossBall *tempBall = new BossBall(*this);
     tempBall->setPos(pos);
+    tempBall->setAngle(angle);
     scene->addItem(tempBall);
     text->setZValue(1);
 }

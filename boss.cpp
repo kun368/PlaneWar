@@ -6,11 +6,7 @@
 
 
 Boss::Boss(GameController &controller):
-    controller(controller),
-    posX(qrand() % viewWidth),
-    dirl(true),
-    fullLife(30 * difficulty),
-    life(30 * difficulty)
+    controller(controller)
 {
     setData(GD_type, GO_Boss);
     pixMap.load(":/images/Boss.png");
@@ -19,6 +15,9 @@ Boss::Boss(GameController &controller):
     gradient->setColorAt(0.2, Qt::yellow);
     gradient->setColorAt(0.7, Qt::blue);
     gradient->setColorAt(1, Qt::green);
+    setPos(viewWidth/2, 150);
+    life = fullLife = 30 * difficulty;
+    rad = cnt = 0;
 }
 
 QRectF Boss::boundingRect() const
@@ -44,17 +43,16 @@ void Boss::advance(int phace)
 {
     if(!phace) return;
 
-    if(dirl) posX -= 5;
-    else posX += 5;
-    if(posX >= viewWidth || posX <= 0)
-        dirl = !dirl;
-    setPos(posX, 150);
-
-    int r = qrand() % 300;
-    if(++cnt == (300/difficulty)){
-        controller.shootBossBall(QPointF(posX, 210));
+    if(++cnt == 10) {
+        rad = (rad + 18) % 360;
+        controller.shootBossBall(pos(), rad + 0);
+        controller.shootBossBall(pos(), rad + 72);
+        controller.shootBossBall(pos(), rad + 144);
+        controller.shootBossBall(pos(), rad + 216);
+        controller.shootBossBall(pos(), rad + 288);
         cnt = 0;
     }
+
     handleCollisions();
 }
 

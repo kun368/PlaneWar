@@ -16,7 +16,9 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void advance(int phace);
+    void setAngle(qreal angle);
 private:
+    QPointF vector;
     QPixmap pixMap;
     GameController &controller;
 };

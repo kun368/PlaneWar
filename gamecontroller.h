@@ -50,7 +50,7 @@ public slots:
     void disappearCollision();
     void shootBullet(QPointF pos, int speed);
     void shootBall(QPointF pos);
-    void shootBossBall(QPointF pos);
+    void shootBossBall(QPointF pos, qreal angle);
     void shootWingBullet(QPointF pos);
     void updateLife(int dlife);
 protected:

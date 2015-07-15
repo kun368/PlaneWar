@@ -6,7 +6,8 @@ BossBall::BossBall(GameController &controller):
     controller(controller)
 {
     setData(GD_type, GO_BossBall);
-    pixMap.load(":/images/BossBall.png");
+    pixMap.load(":/images/BossBall1.png");
+    setAngle(0);
 }
 
 QRectF BossBall::boundingRect() const
@@ -30,8 +31,13 @@ void BossBall::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 void BossBall::advance(int phace)
 {
     if(!phace) return;
-
-    QPointF cur = pos();
-    setPos(cur.x(), cur.y() + 7);
+    moveBy(vector.x() * 5, vector.y() * 5);
     if(!isInView(pos())) controller.removeItem(this);
+}
+
+void BossBall::setAngle(qreal angle)
+{
+    qreal rad = (angle*3.1415926)/180.0;
+    vector.setX(-cos(rad));
+    vector.setY(sin(rad));
 }
