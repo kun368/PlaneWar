@@ -8,11 +8,10 @@
 
 Rank::Rank(QObject *parent) :
     QObject(parent),
-    file("rank.txt")
+    file("rank.dat")
 {
     if(!file.open(QIODevice::ReadWrite|QIODevice::Text))
         qDebug() << "Can't open file";
-    read();
 }
 
 Rank::~Rank()
@@ -30,11 +29,13 @@ void Rank::read()
         in >> t.name >> t.score >> t.time;
         list.push_back(t);
     }
+    qSort(list);
 }
 
 void Rank::write()
 {
     file.resize(0);
+    qSort(list);
     QDataStream out(&file);
     for(Record i : list) {
         out << i.name << i.score << i.time;
@@ -44,6 +45,7 @@ void Rank::write()
 void Rank::add(Record rhs)
 {
     list.push_back(rhs);
+    qSort(list);
     QDataStream out(&file);
     out << rhs.name << rhs.score << rhs.time;
 }
@@ -52,10 +54,10 @@ void Rank::show()
 {
     read();
     qSort(list);
-//    qDebug() << list.size();
-//    for(Record i : list) {
-//        qDebug() << i.name << i.score << i.time;
-//    }
+    qDebug() << list.size();
+    for(Record i : list) {
+        qDebug() << i.name << i.score << i.time;
+    }
     QStandardItemModel * model = new QStandardItemModel(list.size(), 3);
     model->setHorizontalHeaderItem(0, new QStandardItem(tr("玩家姓名")));
     model->setHorizontalHeaderItem(1, new QStandardItem(tr("玩家得分")));

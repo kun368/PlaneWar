@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/images">
-        <file>Ball.png</file>
         <file>Bullet.png</file>
         <file>MyPlane.png</file>
         <file>Ball1.BMP</file>

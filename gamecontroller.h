@@ -53,6 +53,8 @@ public slots:
     void shootBossBall(QPointF pos, qreal angle);
     void shootWingBullet(QPointF pos);
     void updateLife(int dlife);
+    void gotoNight();
+    void outNight();
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
     void handleKeyPressed(QKeyEvent *event);
@@ -69,7 +71,7 @@ private:
     Boss *boss;
     WingPlane *wing1, *wing2;
     QFont *font;
-    QGraphicsTextItem *text;
+    QGraphicsTextItem *text, *nightText, *tipText;
 };
 
 #endif // GAMECONTROLLER_H

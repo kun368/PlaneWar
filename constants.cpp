@@ -4,7 +4,7 @@ bool loadmode;
 QString backgroundName;
 bool backgroundLoop;
 int difficulty;
-const int viewHeight = 600;
+const int viewHeight = 650;
 const int viewWidth = 500;
 QString playerName;
 

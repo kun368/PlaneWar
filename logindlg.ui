@@ -193,7 +193,7 @@
    </property>
    <item>
     <property name="text">
-     <string>简单</string>
+     <string>困难</string>
     </property>
    </item>
    <item>
@@ -203,7 +203,7 @@
    </item>
    <item>
     <property name="text">
-     <string>困难</string>
+     <string>简单</string>
     </property>
    </item>
   </widget>
@@ -249,7 +249,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>190</x>
@@ -266,7 +266,7 @@
 font: 14pt &quot;微软雅黑&quot;;</string>
       </property>
       <property name="text">
-       <string>查看排行榜</string>
+       <string>排行榜</string>
       </property>
      </widget>
     </item>
@@ -277,7 +277,7 @@ font: 14pt &quot;微软雅黑&quot;;</string>
 font: 14pt &quot;微软雅黑&quot;;</string>
       </property>
       <property name="text">
-       <string>游戏说明</string>
+       <string>游戏玩法</string>
       </property>
      </widget>
     </item>

@@ -53,7 +53,7 @@ void Circle::handleCollisions()
     QList<QGraphicsItem *> collisions = collidingItems();
     foreach (QGraphicsItem *item, collisions) {
         auto t = item->data(GD_type);
-        if(t == GO_Ball || t == GO_Enemy) {
+        if(t == GO_Ball || t == GO_Enemy || t == GO_BossBall) {
             controller.removeItem(item);
             controller.ariseCollision(item->pos());
             return;

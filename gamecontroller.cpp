@@ -89,19 +89,35 @@ void GameController::startGame()
 
     addWingPlane();    // 初始化僚机
 
-    life = loadmode ? 999999 : (15/difficulty);    //初始化显示分数
+    font = new QFont();    //初始化字体
+    font->setBold(true);
+    font->setPixelSize(20);
+
+    life = loadmode ? 999999 : (15/difficulty);    //初始化显示分数生命
     score = 0;
     text = new QGraphicsTextItem();
-    font = new QFont();
-    font->setBold(true);
-    font->setPixelSize(22);
     text->setDefaultTextColor(Qt::yellow);
     text->setFont(*font);
     text->setPos(10, 10);
     scene->addItem(text);
     updateText(1000);
 
+    nightText = new QGraphicsTextItem();      //初始化黑夜模式字体
+    nightText->setFont(*font);
+    nightText->setDefaultTextColor(Qt::yellow);
+    nightText->setPos(10, 50);
+    nightText->setPlainText("正常飞行中...");
+    scene->addItem(nightText);
+
+    tipText = new QGraphicsTextItem();      //初始化游戏提示
+    tipText->setDefaultTextColor(Qt::red);
+    tipText->setPos(10, viewHeight-50);
+    tipText->setFont(*font);
+    tipText->setPlainText("地雷D  僚机A  清屏大招B  光环防护罩M");
+    scene->addItem(tipText);
+
     QTimer::singleShot(20000, this, SLOT(addBoss())); //一定时间后出现第一个BOSS
+    QTimer::singleShot(30000, this, SLOT(gotoNight()));
 
     connect(&timer, SIGNAL(timeout()), scene, SLOT(advance()));      //各种计时器
     connect(&timerApperEnemy, SIGNAL(timeout()), this, SLOT(addEnemy()));
@@ -244,6 +260,20 @@ void GameController::updateLife(int dlife)
     life += dlife;
     updateText(0);
     if(life <= 0) gameOver();
+}
+
+void GameController::gotoNight()
+{
+    nightText->setPlainText("黑夜飞行中...");
+    scene->setForegroundBrush(QColor(0, 0, 0, 127));
+    QTimer::singleShot(30000, this, SLOT(outNight()));
+}
+
+void GameController::outNight()
+{
+    nightText->setPlainText("正常飞行中...");
+    scene->setForegroundBrush(QColor(0, 0, 0, 0));
+    QTimer::singleShot(30000, this, SLOT(gotoNight()));
 }
 
 bool GameController::eventFilter(QObject *obj, QEvent *event)
