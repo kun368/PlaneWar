@@ -56,6 +56,11 @@ int GameController::getRank()
     return score/2000.0 + 1;
 }
 
+int GameController::getMyPlaneLife()
+{
+    return life;
+}
+
 void GameController::clearAllEnemy()
 {
     updateText(-200);   //清屏大招消耗积分
@@ -91,13 +96,13 @@ void GameController::startGame()
     wing1 = new WingPlane(*this); wing2 = new WingPlane(*this);  //初始化僚机
     wing1->setParentItem(plane); wing2->setParentItem(plane);
     wing1->setPos(-70, 70); wing2->setPos(70, 70);
-    QTimer::singleShot(10000, this, SLOT(disappearWingPlane()));
+    QTimer::singleShot(6000, this, SLOT(disappearWingPlane()));
 
     font = new QFont();    //初始化字体
     font->setBold(true);
     font->setPixelSize(20);
 
-    life = loadmode ? 999999 : (15/difficulty);    //初始化显示分数生命
+    life = myPlaneFullLife;    //初始化显示分数生命
     score = 0;
     text = new QGraphicsTextItem();
     text->setDefaultTextColor(Qt::yellow);
@@ -161,6 +166,14 @@ void GameController::addLifeAdder()
     int x = qrand() % viewWidth, y = 1;
     LifeAdder *temp = new LifeAdder(*this);
     temp->setPos(x, y);
+    scene->addItem(temp);
+    text->setZValue(1);
+}
+
+void GameController::addLifeAdder(QPointF pos)
+{
+    LifeAdder *temp = new LifeAdder(*this);
+    temp->setPos(pos);
     scene->addItem(temp);
     text->setZValue(1);
 }

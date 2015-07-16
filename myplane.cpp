@@ -13,6 +13,11 @@ MyPlane::MyPlane(GameController &controller):
     setData(GD_type, GO_MyPlane);
     pixMap.load(":/images/MyPlane2.png");
     speedX = speedY = isFireing = 0;
+    gradient = new QLinearGradient(QPoint(-50, -50), QPoint(50, 50));
+    gradient->setColorAt(0, Qt::red);
+    gradient->setColorAt(0.2, Qt::yellow);
+    gradient->setColorAt(0.7, Qt::blue);
+    gradient->setColorAt(1, Qt::green);
 }
 
 QRectF MyPlane::boundingRect() const
@@ -30,6 +35,8 @@ void MyPlane::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
         painter->scale(0.6 * sc, 0.6 * sc);
         int w = pixMap.width(), h = pixMap.height();
         painter->drawPixmap(QPoint(-w/2, -h/2), pixMap);
+        painter->setBrush(*gradient);
+        painter->drawRect(-w/2, -h/2 - 10, qMin(w*controller.getMyPlaneLife()/myPlaneFullLife, w), 8);
         painter->restore();
     }
 }

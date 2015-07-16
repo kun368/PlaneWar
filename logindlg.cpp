@@ -30,7 +30,7 @@ LogInDlg::LogInDlg(QWidget *parent) :
     ui->pushButton_start->setFlat(true);
     ui->pushButton_ShowRank->setFlat(true);
     //初始化玩家信息
-    qsrand(QDateTime::currentDateTime().utcOffset());
+    qsrand(QTime::currentTime().msec());
     ui->lineEdit->setText(QString("玩家%1").arg(qrand()));
 }
 
@@ -72,6 +72,8 @@ void LogInDlg::on_pushButton_start_clicked()
     saveLoadMode();
     saveDifficulty();
     savePlayerName();
+    if(loadmode) myPlaneFullLife = 9999999;
+    else myPlaneFullLife = 15/difficulty;
     accept();
 }
 

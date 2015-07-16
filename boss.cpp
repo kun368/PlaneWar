@@ -68,6 +68,9 @@ void Boss::handleCollisions()
             if(--life <= 0) {
                 controller.updateText(2000 + qrand() % 100);
                 controller.removeItem(this);
+                controller.addLifeAdder(QPointF(pos().x()-100, pos().y()+30));  //出现补给箱
+                controller.addLifeAdder(QPointF(pos().x(), pos().y()+30));
+                controller.addLifeAdder(QPointF(pos().x()+100, pos().y()+30));
                 QTimer::singleShot(70000, &controller, SLOT(addBoss()));
             }
             return;

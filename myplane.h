@@ -9,6 +9,7 @@
 #include <QPainter>
 #include <QPicture>
 #include <QPixmap>
+#include <QLinearGradient>
 
 class GameController;
 
@@ -25,6 +26,7 @@ public:
     void setSpeedY(int y);
     void setFireStatus(bool can);
 private:
+    QLinearGradient *gradient;
     int speedX, speedY, isFireing;
     GameController &controller;
     QPixmap pixMap;

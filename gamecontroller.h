@@ -36,11 +36,13 @@ public:
 signals:
     void exitApp();
 public slots:
+    int getMyPlaneLife();
     void clearAllEnemy();
     void startGame();
     void gameOver();
     void addEnemy();
     void addLifeAdder();
+    void addLifeAdder(QPointF pos);
     void addBoss();
     void addCircle();
     void addWingPlane();

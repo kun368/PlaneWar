@@ -28,6 +28,10 @@
      <height>22</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 0);
+background-color: rgb(144, 139, 149);</string>
+   </property>
    <item>
     <property name="text">
      <string>星际迷航</string>
@@ -59,7 +63,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
+    <string notr="true">color: rgb(255, 255, 0);</string>
    </property>
    <property name="text">
     <string>选择关卡：</string>
@@ -88,7 +92,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
+    <string notr="true">color: rgb(255, 255, 0);</string>
    </property>
    <property name="text">
     <string>滚动背景：</string>
@@ -102,6 +106,10 @@
      <width>101</width>
      <height>22</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 0);
+background-color: rgb(144, 139, 149);</string>
    </property>
    <item>
     <property name="text">
@@ -140,7 +148,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
+    <string notr="true">color: rgb(255, 255, 0);</string>
    </property>
    <property name="text">
     <string>上帝模式：</string>
@@ -156,7 +164,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
+    <string notr="true">color: rgb(255, 255, 0);</string>
    </property>
    <property name="text">
     <string>难度等级：</string>
@@ -170,6 +178,10 @@
      <width>101</width>
      <height>22</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 0);
+background-color: rgb(144, 139, 149);</string>
    </property>
    <item>
     <property name="text">
@@ -190,6 +202,10 @@
      <width>101</width>
      <height>22</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 0);
+background-color: rgb(144, 139, 149);</string>
    </property>
    <item>
     <property name="text">
@@ -230,7 +246,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
+    <string notr="true">color: rgb(255, 255, 0);</string>
    </property>
    <property name="text">
     <string>您的尊姓大名：</string>
@@ -244,6 +260,11 @@
      <width>261</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 0, 0);
+background-color: rgb(144, 139, 149);
+alternate-background-color: rgb(144, 139, 149);</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -262,8 +283,8 @@
     <item>
      <widget class="QPushButton" name="pushButton_ShowRank">
       <property name="styleSheet">
-       <string notr="true">color: rgb(255, 255, 255);
-font: 14pt &quot;微软雅黑&quot;;</string>
+       <string notr="true">color: qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(255, 255, 0, 69), stop:0.375 rgba(255, 255, 0, 69), stop:0.423533 rgba(251, 255, 0, 145), stop:0.45 rgba(247, 255, 0, 208), stop:0.477581 rgba(255, 244, 71, 130), stop:0.518717 rgba(255, 218, 71, 130), stop:0.55 rgba(255, 255, 0, 255), stop:0.57754 rgba(255, 203, 0, 130), stop:0.625 rgba(255, 255, 0, 69), stop:1 rgba(255, 255, 0, 69));
+font: 12pt &quot;微软雅黑&quot;;</string>
       </property>
       <property name="text">
        <string>排行榜</string>
@@ -273,8 +294,8 @@ font: 14pt &quot;微软雅黑&quot;;</string>
     <item>
      <widget class="QPushButton" name="pushButton_help">
       <property name="styleSheet">
-       <string notr="true">color: rgb(255, 255, 255);
-font: 14pt &quot;微软雅黑&quot;;</string>
+       <string notr="true">color: qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(255, 255, 0, 69), stop:0.375 rgba(255, 255, 0, 69), stop:0.423533 rgba(251, 255, 0, 145), stop:0.45 rgba(247, 255, 0, 208), stop:0.477581 rgba(255, 244, 71, 130), stop:0.518717 rgba(255, 218, 71, 130), stop:0.55 rgba(255, 255, 0, 255), stop:0.57754 rgba(255, 203, 0, 130), stop:0.625 rgba(255, 255, 0, 69), stop:1 rgba(255, 255, 0, 69));
+font: 12pt &quot;微软雅黑&quot;;</string>
       </property>
       <property name="text">
        <string>游戏玩法</string>
@@ -284,8 +305,8 @@ font: 14pt &quot;微软雅黑&quot;;</string>
     <item>
      <widget class="QPushButton" name="pushButton_About">
       <property name="styleSheet">
-       <string notr="true">color: rgb(255, 255, 255);
-font: 14pt &quot;微软雅黑&quot;;</string>
+       <string notr="true">color: qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(255, 255, 0, 69), stop:0.375 rgba(255, 255, 0, 69), stop:0.423533 rgba(251, 255, 0, 145), stop:0.45 rgba(247, 255, 0, 208), stop:0.477581 rgba(255, 244, 71, 130), stop:0.518717 rgba(255, 218, 71, 130), stop:0.55 rgba(255, 255, 0, 255), stop:0.57754 rgba(255, 203, 0, 130), stop:0.625 rgba(255, 255, 0, 69), stop:1 rgba(255, 255, 0, 69));
+font: 12pt &quot;微软雅黑&quot;;</string>
       </property>
       <property name="text">
        <string>关于作者</string>

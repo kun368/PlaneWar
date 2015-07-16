@@ -4,6 +4,7 @@ bool loadmode;
 QString backgroundName;
 bool backgroundLoop;
 int difficulty;
+int myPlaneFullLife;
 const int viewHeight = 650;
 const int viewWidth = 500;
 QString playerName;

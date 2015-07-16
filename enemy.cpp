@@ -59,6 +59,7 @@ void Enemy::handleCollisions()
             controller.removeItem(this);
             controller.ariseCollision(pos());
             controller.removeItem(item);
+            if((qrand()%100) < 25) controller.addLifeAdder(pos());
             return;
         }
         if(item->data(GD_type) == GO_WingBullet) {
