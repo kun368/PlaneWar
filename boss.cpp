@@ -31,6 +31,7 @@ void Boss::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     Q_UNUSED(option); Q_UNUSED(widget);
     if(!pixMap.isNull()) {
         painter->save();
+        painter->scale(1.3, 1.3);
         int w = pixMap.width(), h = pixMap.height();
         painter->drawPixmap(QPoint(-w/2, -h/2), pixMap);
         painter->setBrush(*gradient);

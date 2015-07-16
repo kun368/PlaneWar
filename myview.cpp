@@ -19,7 +19,7 @@ MyView::MyView(QWidget *parent):
     list->setCurrentIndex(0);
     list->setPlaybackMode(QMediaPlaylist::CurrentItemInLoop);
     player->setPlaylist(list);
-    player->setVolume(75);
+    player->setVolume(80);
     player->play();
 
     icon = new QIcon(":/images/Icon.png");

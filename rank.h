@@ -14,10 +14,10 @@
 
 struct Record{
     QString name;
-    int score;
-    QDateTime time;
+    QString score;
+    QString time;
     bool operator < (const Record & rhs) const {
-        return score == rhs.score ? time < rhs.time : score > rhs.score;
+        return score.toInt() > rhs.score.toInt();
     }
 };
 

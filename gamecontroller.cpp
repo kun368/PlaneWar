@@ -19,8 +19,8 @@ GameController::GameController(QGraphicsScene *scene, QObject *parent) :
     scene(scene)
 {
     timer.start(1000/33);
-    timerApperEnemy.start(3000/difficulty);
-    timerApperLifeAdder.start(7000*difficulty);
+    timerApperEnemy.start(1500/difficulty);
+    timerApperLifeAdder.start(5000*difficulty);
 
     scene->installEventFilter(this);
     startGame();
@@ -87,7 +87,11 @@ void GameController::startGame()
     circle->setParentItem(plane);
     QTimer::singleShot(15000, this, SLOT(disappearCircle()));
 
-    addWingPlane();    // 初始化僚机
+
+    wing1 = new WingPlane(*this); wing2 = new WingPlane(*this);  //初始化僚机
+    wing1->setParentItem(plane); wing2->setParentItem(plane);
+    wing1->setPos(-70, 70); wing2->setPos(70, 70);
+    QTimer::singleShot(10000, this, SLOT(disappearWingPlane()));
 
     font = new QFont();    //初始化字体
     font->setBold(true);
@@ -133,7 +137,9 @@ void GameController::gameOver()
     // 如果不是上帝模式，显示排行榜
     if(!loadmode) {
         Rank rank;
-        Record cur; cur.name = playerName; cur.score = score; cur.time = QDateTime::currentDateTime();
+        Record cur; cur.name = playerName;
+        cur.score = QString::number(score);
+        cur.time = QDateTime::currentDateTime().toString("yyyy.mm.dd.hh:mm:ss.ap");
         rank.add(cur);
         rank.show();
     }
@@ -176,6 +182,7 @@ void GameController::addCircle()
 void GameController::addWingPlane()
 {
     // updateText(-300);
+    scene->removeItem(wing1); scene->removeItem(wing2);    //删除旧的僚机
     wing1 = new WingPlane(*this); wing2 = new WingPlane(*this);
     wing1->setParentItem(plane); wing2->setParentItem(plane);
     wing1->setPos(-70, 70); wing2->setPos(70, 70);
