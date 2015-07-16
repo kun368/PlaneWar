@@ -118,12 +118,10 @@ void GameController::startGame()
     nightText->setPlainText("正常飞行中...");
     scene->addItem(nightText);
 
-    tipText = new QGraphicsTextItem();      //初始化游戏提示
-    tipText->setDefaultTextColor(Qt::red);
-    tipText->setPos(10, viewHeight-50);
-    tipText->setFont(*font);
-    tipText->setPlainText("地雷D  僚机A  清屏大招B  光环防护罩M");
-    scene->addItem(tipText);
+    //初始化游戏提示
+    tip = new Tip(*this);
+    scene->addItem(tip);
+
 
     QTimer::singleShot(20000, this, SLOT(addBoss())); //一定时间后出现第一个BOSS
     QTimer::singleShot(30000, this, SLOT(gotoNight()));
@@ -144,7 +142,7 @@ void GameController::gameOver()
         Rank rank;
         Record cur; cur.name = playerName;
         cur.score = QString::number(score);
-        cur.time = QDateTime::currentDateTime().toString("yyyy.mm.dd.hh:mm:ss.ap");
+        cur.time = QDateTime::currentDateTime().toString("yyyy.MM.dd..hh:mm.ap");
         rank.add(cur);
         rank.show();
     }

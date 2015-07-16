@@ -10,6 +10,7 @@
 #include "wingplane.h"
 #include "wingbullet.h"
 #include "flowback.h"
+#include "tip.h"
 #include <QObject>
 #include <QFont>
 #include <QRectF>
@@ -73,7 +74,8 @@ private:
     Boss *boss;
     WingPlane *wing1, *wing2;
     QFont *font;
-    QGraphicsTextItem *text, *nightText, *tipText;
+    Tip *tip;
+    QGraphicsTextItem *text, *nightText;
 };
 
 #endif // GAMECONTROLLER_H

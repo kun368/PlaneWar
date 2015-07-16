@@ -31,7 +31,8 @@ enum GameObjectTypes {
     GO_Boss,
     GO_BossBall,
     GO_WingPlane,
-    GO_WingBullet
+    GO_WingBullet,
+    GO_Tip
 };
 
 #endif // CONSTANTS_H

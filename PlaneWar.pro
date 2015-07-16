@@ -32,7 +32,8 @@ SOURCES += main.cpp \
     bossball.cpp \
     wingplane.cpp \
     wingbullet.cpp \
-    rank.cpp
+    rank.cpp \
+    tip.cpp
 
 HEADERS  += \
     myview.h \
@@ -52,7 +53,8 @@ HEADERS  += \
     bossball.h \
     wingplane.h \
     wingbullet.h \
-    rank.h
+    rank.h \
+    tip.h
 
 FORMS    += \
     logindlg.ui \

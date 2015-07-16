@@ -22,6 +22,7 @@
         <file>Enemy3.png</file>
         <file>Enemy4.png</file>
         <file>Enemy5.png</file>
+        <file>Tip.png</file>
     </qresource>
     <qresource prefix="/musics">
         <file>Collision.wav</file>
