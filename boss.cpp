@@ -53,26 +53,23 @@ void Boss::advance(int phace)
         controller.shootBossBall(pos(), rad + 288);
         cnt = 0;
     }
-
     handleCollisions();
 }
 
 void Boss::handleCollisions()
 {
+    if(life <= 0){
+        handleDie();
+        return;
+    }
     QList<QGraphicsItem *> collisions = collidingItems();
     foreach (QGraphicsItem *item, collisions) {
         auto t = item->data(GD_type);
         if(t == GO_Bullet || t == GO_WingBullet) {
             controller.ariseCollision(pos());
             controller.removeItem(item);
-            if(--life <= 0) {
-                controller.updateText(2000 + qrand() % 100);
-                controller.removeItem(this);
-                controller.addLifeAdder(QPointF(pos().x()-100, pos().y()+30));  //出现补给箱
-                controller.addLifeAdder(QPointF(pos().x(), pos().y()+30));
-                controller.addLifeAdder(QPointF(pos().x()+100, pos().y()+30));
-                QTimer::singleShot(70000, &controller, SLOT(addBoss()));
-            }
+            if(--life <= 0)
+                handleDie();
             return;
         }
     }
@@ -81,4 +78,14 @@ void Boss::handleCollisions()
 void Boss::changeLife(const int d)
 {
     life += d;
+}
+
+void Boss::handleDie()
+{
+    controller.updateText(2000 + qrand() % 100);
+    controller.removeItem(this);
+    controller.addLifeAdder(QPointF(pos().x()-100, pos().y()+30));  //出现补给箱
+    controller.addLifeAdder(QPointF(pos().x(), pos().y()+30));
+    controller.addLifeAdder(QPointF(pos().x()+100, pos().y()+30));
+    QTimer::singleShot(70000, &controller, SLOT(addBoss()));
 }

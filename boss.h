@@ -18,6 +18,7 @@ public:
     void advance(int phace);
     void handleCollisions();
     void changeLife(const int d);
+    void handleDie();
 private:
     QPixmap pixMap;
     QLinearGradient *gradient;

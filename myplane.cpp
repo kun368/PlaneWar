@@ -49,7 +49,7 @@ void MyPlane::advance(int phace)
     if(pos().x() < 0) setPos(0, pos().y());
     if(pos().x() > viewWidth) setPos(viewWidth, pos().y());
     if(pos().y() < 0) setPos(pos().x(), 0);
-    if(pos().y() > viewHeight) setPos(pos().x(), viewHeight);
+    if(pos().y() > viewHeight-50) setPos(pos().x(), viewHeight-50);
 
     if(isFireing) {
         if(isFireing % 7  == 1) fire(10);
