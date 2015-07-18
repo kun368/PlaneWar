@@ -6,7 +6,7 @@ Tip::Tip(GameController &controller):
     controller(controller)
 {
     setData(GD_type, GO_Tip);
-    pixMap.load(":/images/Tip.png");
+    pixMap.load("://images/Tip.png");
     setPos(-15, viewHeight-pixMap.height()+5);
     setZValue(2);
 }

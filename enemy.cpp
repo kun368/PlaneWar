@@ -11,7 +11,7 @@ Enemy::Enemy(GameController &controller):
     speedX(qrand() % 7 - 3)
 {
     setData(GD_type, GO_Enemy);
-    QString str = QString(":/images/Enemy%1.png").arg(qrand()%5+1);
+    QString str = QString("://images/Enemy%1.png").arg(qrand()%5+1);
     pixMap.load(str);  //五种敌机图
     rad = -(atan(speedX*1.0/speedY) / 3.1415926) * 180.0;
 }

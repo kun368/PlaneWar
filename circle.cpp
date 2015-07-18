@@ -10,7 +10,7 @@ Circle::Circle(GameController &controller):
     cur(0)
 {
     setData(GD_type, GO_Circle);
-    pixMap.load(":/images/Circle.png");
+    pixMap.load("://images/Circle.png");
     int w = pixMap.width() * 0.7, h = pixMap.height() * 0.7;
     path = new QPainterPath;
     path->addEllipse(QRectF(-w/2, -h/2, w, h));

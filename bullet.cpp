@@ -6,7 +6,7 @@ Bullet::Bullet(GameController &controller):
     controller(controller)
 {
     setData(GD_type, GO_Bullet);
-    pixMap.load(":/images/Bullet.png");
+    pixMap.load("://images/Bullet.png");
     speed = 8;
 }
 

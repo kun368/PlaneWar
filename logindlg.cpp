@@ -20,7 +20,7 @@ LogInDlg::LogInDlg(QWidget *parent) :
     // 设置背景图片
     this->setWindowFlags(Qt::FramelessWindowHint);
     pix = new QPixmap;
-    pix->load(":/images/LogInBackground.png", 0, Qt::AvoidDither|Qt::ThresholdAlphaDither|Qt::ThresholdDither);
+    pix->load("://images/LogInBackground.png", 0, Qt::AvoidDither|Qt::ThresholdAlphaDither|Qt::ThresholdDither);
     resize(pix->size());
     this->setMask(pix->mask());
     // 设置按钮透明

@@ -7,7 +7,7 @@ Ball::Ball(GameController &controller):
     controller(controller)
 {
     setData(GD_type, GO_Ball);
-    pixMap.load(":/images/Ball1.BMP");
+    pixMap.load("://images/Ball1.BMP");
     dirx = qrand() % 6 - 3;
 }
 

@@ -9,7 +9,7 @@ Boss::Boss(GameController &controller):
     controller(controller)
 {
     setData(GD_type, GO_Boss);
-    pixMap.load(":/images/Boss.png");
+    pixMap.load("://images/Boss.png");
     gradient = new QLinearGradient(QPoint(-50, -50), QPoint(50, 50));
     gradient->setColorAt(0, Qt::red);
     gradient->setColorAt(0.2, Qt::yellow);

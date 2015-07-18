@@ -7,7 +7,7 @@ WingPlane::WingPlane(GameController &controller):
     cnt(0)
 {
     setData(GD_type, GO_WingPlane);
-    pixMap.load(":/images/MyPlane.png");
+    pixMap.load("://images/MyPlane.png");
 }
 
 QRectF WingPlane::boundingRect() const

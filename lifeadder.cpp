@@ -7,7 +7,7 @@ LifeAdder::LifeAdder(GameController &controller):
     controller(controller)
 {
     setData(GD_type, GO_LifeAdder);
-    pixMap.load(":/images/LifeAdder.png");
+    pixMap.load("://images/LifeAdder.png");
 }
 
 QRectF LifeAdder::boundingRect() const

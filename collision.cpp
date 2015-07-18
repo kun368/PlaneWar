@@ -4,7 +4,7 @@
 Collision::Collision()
 {
     setData(GD_type, GO_Collision);
-    pixMap.load(":/images/Collision.png");
+    pixMap.load("://images/Collision.png");
 }
 
 QRectF Collision::boundingRect() const

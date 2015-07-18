@@ -11,7 +11,7 @@ MyPlane::MyPlane(GameController &controller):
     controller(controller)
 {
     setData(GD_type, GO_MyPlane);
-    pixMap.load(":/images/MyPlane2.png");
+    pixMap.load("://images/MyPlane2.png");
     speedX = speedY = isFireing = 0;
     gradient = new QLinearGradient(QPoint(-50, -50), QPoint(50, 50));
     gradient->setColorAt(0, Qt::red);

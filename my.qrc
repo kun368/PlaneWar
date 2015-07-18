@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/background.png</file>
+        <file>images/Ball1.BMP</file>
+        <file>images/bg2.jpg</file>
+        <file>images/bg3.jpg</file>
+        <file>images/bg4.jpg</file>
+        <file>images/Boss.png</file>
+        <file>images/BossBall.png</file>
+        <file>images/BossBall1.png</file>
+        <file>images/Bullet.png</file>
+        <file>images/Circle.png</file>
+        <file>images/Collision.png</file>
+        <file>images/Enemy1.png</file>
+        <file>images/Enemy2.png</file>
+        <file>images/Enemy3.png</file>
+        <file>images/Enemy4.png</file>
+        <file>images/Enemy5.png</file>
+        <file>images/explosion.gif</file>
+        <file>images/Icon.png</file>
+        <file>images/LifeAdder.png</file>
+        <file>images/LogInBackground.png</file>
+        <file>images/MyPlane.png</file>
+        <file>images/MyPlane2.png</file>
+        <file>images/Tip.png</file>
+        <file>images/WingBullet.png</file>
+        <file>musics/a.mp3</file>
+        <file>musics/Collision.wav</file>
+        <file>musics/Shoot.wav</file>
+    </qresource>
+</RCC>

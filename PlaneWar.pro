@@ -63,6 +63,6 @@ FORMS    += \
 DISTFILES +=
 
 RESOURCES += \
-    res.qrc
+    my.qrc
 
 RC_FILE  += myico.rc

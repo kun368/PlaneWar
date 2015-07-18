@@ -218,7 +218,7 @@ void GameController::ariseCollision(QPointF pos)
     scene->addItem(tempCollision);
     collis.push_back(tempCollision);
 
-    QSound *sound = new QSound(":/musics/Collision.wav");
+    QSound *sound = new QSound("://musics/Collision.wav");
     sound->setLoops(1);
     sound->play();
 
@@ -240,7 +240,7 @@ void GameController::shootBullet(QPointF pos, int speed)
     tempBullet->setSpeed(speed);
     scene->addItem(tempBullet);
 
-    QSound *sound = new QSound(":/musics/Shoot.wav");
+    QSound *sound = new QSound("://musics/Shoot.wav");
     sound->setLoops(1);
     sound->play();
 

@@ -6,7 +6,7 @@ BossBall::BossBall(GameController &controller):
     controller(controller)
 {
     setData(GD_type, GO_BossBall);
-    pixMap.load(":/images/BossBall1.png");
+    pixMap.load("://images/BossBall1.png");
     setAngle(0);
 }
 

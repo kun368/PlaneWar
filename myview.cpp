@@ -22,7 +22,7 @@ MyView::MyView(QWidget *parent):
     player->setVolume(80);
     player->play();
 
-    icon = new QIcon(":/images/Icon.png");
+    icon = new QIcon("://images/Icon.png");
 
     setRenderHint(QPainter::Antialiasing); //抗锯齿
     setMinimumSize(viewWidth + 10, viewHeight + 10);  //设置窗口

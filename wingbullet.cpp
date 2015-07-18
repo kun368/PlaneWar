@@ -6,7 +6,7 @@ WingBullet::WingBullet(GameController &controller):
     controller(controller)
 {
     setData(GD_type, GO_WingBullet);
-    pixMap.load(":/images/WingBullet.png");
+    pixMap.load("://images/WingBullet.png");
 }
 
 QRectF WingBullet::boundingRect() const
