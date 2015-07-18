@@ -6,6 +6,7 @@
 #include "gamecontroller.h"
 #include <QObject>
 #include <QKeyEvent>
+#include <QMouseEvent>
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QIcon>
@@ -16,6 +17,7 @@ class MyView : public QGraphicsView
     Q_OBJECT
 public:
     explicit MyView(QWidget *parent = 0);
+    void mousePressEvent(QMouseEvent *event);
 private:
     QIcon *icon;
     QSound *sound;

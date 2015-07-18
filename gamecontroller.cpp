@@ -115,7 +115,7 @@ void GameController::startGame()
     nightText->setFont(*font);
     nightText->setDefaultTextColor(Qt::yellow);
     nightText->setPos(10, 50);
-    nightText->setPlainText("正常飞行中...");
+    nightText->setPlainText("正常飞行中...单击右键记录辉煌！");
     scene->addItem(nightText);
 
     //初始化游戏提示
@@ -282,14 +282,14 @@ void GameController::updateLife(int dlife)
 
 void GameController::gotoNight()
 {
-    nightText->setPlainText("黑夜飞行中...");
+    nightText->setPlainText("黑夜飞行中...单击右键记录辉煌！");
     scene->setForegroundBrush(QColor(0, 0, 0, 127));
     QTimer::singleShot(30000, this, SLOT(outNight()));
 }
 
 void GameController::outNight()
 {
-    nightText->setPlainText("正常飞行中...");
+    nightText->setPlainText("正常飞行中...单击右键记录辉煌！");
     scene->setForegroundBrush(QColor(0, 0, 0, 0));
     QTimer::singleShot(30000, this, SLOT(gotoNight()));
 }

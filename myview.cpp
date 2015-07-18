@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QWidget>
 #include <QPixmap>
+#include <QDateTime>
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
 #include <QMediaPlayerControl>
@@ -19,7 +20,6 @@ MyView::MyView(QWidget *parent):
     list->setCurrentIndex(0);
     list->setPlaybackMode(QMediaPlaylist::CurrentItemInLoop);
     player->setPlaylist(list);
-    player->setVolume(80);
     player->play();
 
     icon = new QIcon("://images/Icon.png");
@@ -37,5 +37,18 @@ MyView::MyView(QWidget *parent):
 
     game = new GameController(scene, this);
     connect(game, SIGNAL(exitApp()), this, SLOT(close()));
+}
+
+void MyView::mousePressEvent(QMouseEvent *event)
+{
+    if(event->button() == Qt::RightButton) {
+        QPixmap pix(viewWidth, viewHeight);
+        QPainter painter(&pix);
+        render(&painter, QRect(0, 0, viewWidth, viewHeight), QRect(0, 0, viewWidth, viewHeight));
+        QString fileName = QString("%1.png").arg(qrand());
+        qDebug() << fileName;
+        pix.save(fileName);
+    }
+    QGraphicsView::mousePressEvent(event);
 }
 
